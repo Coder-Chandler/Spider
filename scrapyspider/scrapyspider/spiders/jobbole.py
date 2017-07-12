@@ -5,6 +5,8 @@ from scrapy.http import Request
 from urllib import parse
 from scrapyspider.items import JobboleItem
 from scrapyspider.utils.common_use_func import get_md5
+import datetime
+
 
 class JobboleSpider(scrapy.Spider):
     name = 'jobbole'
@@ -37,12 +39,12 @@ class JobboleSpider(scrapy.Spider):
         create_date = response.xpath('//p[@class="entry-meta-hide-on-mobile"]/text()')\
             .extract_first().strip().replace(" ·", "")
         praise_num = int(response.xpath('//span[contains(@class,"vote-post-up")]/h10/text()').extract_first(""))
-        fav_nums = response.xpath('//span[contains(@class, "bookmark-btn")]/text()').extract_first("")
-        fav_nums_match = re.match(".*?(\d+).*", fav_nums)
+        fav_num = response.xpath('//span[contains(@class, "bookmark-btn")]/text()').extract_first("")
+        fav_nums_match = re.match(".*?(\d+).*", fav_num)
         if fav_nums_match:
-            fav_nums = int(fav_nums_match.group(1))
+            fav_num = int(fav_nums_match.group(1))
         else:
-            fav_nums = 0
+            fav_num = 0
         comments_num = response.xpath("//a[@href='#article-comment']/span/text()").extract_first("").strip()
         comments_num_match = re.match(".*?(\d+).*", comments_num)
         if comments_num_match:
@@ -56,9 +58,13 @@ class JobboleSpider(scrapy.Spider):
 
         article_item["url_object_id"] = get_md5(response.url)
         article_item["title"] = title
+        try:
+            create_date = datetime.datetime.strptime(create_date, "%Y%m%d").date()
+        except Exception as e:
+            create_date = datetime.datetime.now().date()
         article_item["create_date"] = create_date
         article_item["praise_num"] = praise_num
-        article_item["fav_nums"] = fav_nums
+        article_item["fav_num"] = fav_num
         article_item["comments_num"] = comments_num
         article_item["content"] = content
         article_item["tags"] = tags

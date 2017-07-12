@@ -20,7 +20,7 @@ class JobboleItem(scrapy.Item):
     title = scrapy.Field()
     create_date = scrapy.Field()
     praise_num = scrapy.Field()
-    fav_nums = scrapy.Field()
+    fav_num = scrapy.Field()
     comments_num = scrapy.Field()
     content = scrapy.Field()
     tags = scrapy.Field()
