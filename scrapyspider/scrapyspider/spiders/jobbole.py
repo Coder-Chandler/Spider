@@ -52,4 +52,3 @@ class JobboleSpider(scrapy.Spider):
         yield article_item
 
 
-class JobboleSpider(scrapy.Spider):
