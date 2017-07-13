@@ -35,7 +35,7 @@ ROBOTSTXT_OBEY = False
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
@@ -69,6 +69,7 @@ ROBOTSTXT_OBEY = False
 ITEM_PIPELINES = {
    'scrapyspider.pipelines.JsonExporterPipeline': 2,
    'scrapyspider.pipelines.ArticleImagePipeline': 1,
+   'scrapyspider.pipelines.MysqlTwistedPipeline': 3,
 }
 IMAGES_URLS_FIELD = "front_image_url"
 project_dir = os.path.abspath(os.path.dirname(__file__))
@@ -95,3 +96,8 @@ IMAGES_STORE = os.path.join(project_dir, "images")
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+MYSQL_HOST = "192.168.1.102"
+MYSQL_DBNAME = "spider"
+MYSQL_USER = "root"
+MYSQL_PASSWORD = "root"
