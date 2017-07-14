@@ -4,7 +4,11 @@ import re
 import json
 import time
 import os
+import datetime
 from PIL import Image
+from urllib import parse
+from scrapyspider.items import ZhiHuQuestionItem, ZhiHuAnswerItem
+from scrapyspider.items import SpiderItemLoader
 
 
 class ZhihuSpider(scrapy.Spider):
@@ -23,8 +27,75 @@ class ZhihuSpider(scrapy.Spider):
         "COOKIES_ENABLED": True
     }
 
+    start_answer_url = "https://www.zhihu.com/api/v4/questions/{0}/answers?sort" \
+                       "_by=default&include=data%5B%2A%5D.is_normal%2Cis" \
+                       "_collapsed%2Cannotation_action%2Cannotation_detail%2Ccollapse" \
+                       "_reason%2Cis_sticky%2Ccollapsed_by%2Csuggest_edit%2Ccomment" \
+                       "_count%2Ccan_comment%2Ccontent%2Ceditable_content%2Cvoteup" \
+                       "_count%2Creshipment_settings%2Ccomment_permission%2Cmark" \
+                       "_infos%2Ccreated_time%2Cupdated_time%2Creview" \
+                       "_info%2Crelationship.is_authorized%2Cis_author%2Cvoting%2Cis" \
+                       "_thanked%2Cis_nothelp%2Cupvoted_" \
+                       "followees%3Bdata%5B%2A%5D.author." \
+                       "follower_count%2Cbadge%5B%3F%28type%3Dbest_" \
+                       "answerer%29%5D.topics&limit={1}&offset={2}"
+
     def parse(self, response):
-        pass
+        all_urls = response.css("a::attr(href)").extract()
+        all_urls = [parse.urljoin(response.url, url) for url in all_urls]
+        all_urls = filter(lambda x: True if x.startswith("https") else False, all_urls)
+        for url in all_urls:
+            match_re = re.match("(.*zhihu.com/question/(\d+))(/|$).*", url)
+            if match_re:
+                request_url = match_re.group(1)
+                yield scrapy.Request(request_url, headers=self.headers, callback=self.parse_question)
+                break
+            else:
+                # yield scrapy.Request(url, headers=self.headers, callback=self.parse)
+                pass
+
+    def parse_question(self, response):
+        question_id = 0
+        match_re = re.match("(.*zhihu.com/question/(\d+))(/|$).*", response.url)
+        if match_re:
+            question_id = int(match_re.group(2))
+        item_loader = SpiderItemLoader(item=ZhiHuQuestionItem(), response=response)
+        item_loader.add_value("zhihu_id", question_id)
+        item_loader.add_xpath("question_topics", "//div[@class='Popover']/div/text()")
+        item_loader.add_value("question_url", response.url)
+        item_loader.add_xpath("question_title", "//h1[@class='QuestionHeader-title']/text()")
+        item_loader.add_xpath("question_content", "//div[@class='QuestionHeader-detail']/div/div/span/text()")
+        item_loader.add_xpath("question_answer_num", "//h4[@class='List-headerText']/span/text()")
+        item_loader.add_xpath("question_comments_num", "//div[@class='QuestionHeader-Comment']/button/text()")
+        item_loader.add_xpath("question_watch_user_num", "//div[@class='NumberBoard-value']/text()")
+        # item_loader.add_xpath("question_follow_num", "//div[@class='NumberBoard-value']/text()")
+
+        question_item = item_loader.load_item()
+        yield scrapy.Request(self.start_answer_url.format(question_id, 20, 0), headers=self.headers,
+                             callback=self.parse_answer)
+        yield question_item
+
+    def parse_answer(self, response):
+        ans_json = json.loads(response.text)
+        is_end = ans_json["paging"]["is_end"]
+        next_url = ans_json["paging"]["next"]
+
+        for answer in ans_json["data"]:
+            answer_item = ZhiHuAnswerItem()
+            answer_item["zhihu_id"] = answer["id"]
+            answer_item["answer_url"] = answer["url"]
+            answer_item["question_id"] = answer["question"]["id"]
+            answer_item["answer_author_id"] = answer["author"]["id"] if "id" in answer["author"] else None
+            answer_item["answer_content"] = answer["content"] if "content" in answer else None
+            answer_item["answer_praise_num"] = answer["voteup_count"]
+            answer_item["answer_comments_num"] = answer["comment_count"]
+            answer_item["answer_create_date"] = answer["created_time"]
+            answer_item["answer_update_date"] = answer["updated_time"]
+            answer_item["crawl_time"] = datetime.datetime.now()
+
+            yield answer_item
+        if is_end is not True:
+            yield scrapy.Request(next_url, headers=self.headers, callback=self.parse_answer)
 
     def start_requests(self):
         return [scrapy.Request("http://www.zhihu.com/#signin", headers=self.headers, callback=self.login)]
@@ -37,7 +108,6 @@ class ZhihuSpider(scrapy.Spider):
             xsrf = match_re.group(1)
 
         if xsrf:
-            post_url = "https://www.zhihu.com/login/phone_num"
             post_data = {
                 "_xsrf": xsrf,
                 "phone_num": "13770955080",
@@ -59,7 +129,7 @@ class ZhihuSpider(scrapy.Spider):
         try:
             im = Image.open("captcha.jpg")
             im.show()
-            #im.close()
+            im.close()
         except:
             print("请到 %s 目录找到captcha.jpg 手动输入" % os.path.abspath("captcha.jpg"))
 
@@ -80,6 +150,6 @@ class ZhihuSpider(scrapy.Spider):
         if "msg" in text_json and text_json["msg"] == "登录成功":
             print("登录成功")
             for url in self.start_urls:
-                yield scrapy.Request(url,dont_filter=True, headers=self.headers)
+                yield scrapy.Request(url, dont_filter=True, headers=self.headers)
         else:
             print("登录失败")

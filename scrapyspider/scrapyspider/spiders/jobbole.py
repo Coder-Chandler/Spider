@@ -4,7 +4,7 @@ from scrapy.http import Request
 from urllib import parse
 from scrapyspider.items import JobboleItem
 from scrapyspider.utils.common_use_func import get_md5
-from scrapyspider.items import JobboleItemLoader
+from scrapyspider.items import SpiderItemLoader
 
 
 class JobboleSpider(scrapy.Spider):
@@ -33,7 +33,7 @@ class JobboleSpider(scrapy.Spider):
     def parse_detail(self, response):
         article_item = JobboleItem()
         front_image_url = response.meta.get("front_image_url", "")
-        item_loader = JobboleItemLoader(item=JobboleItem(), response=response)
+        item_loader = SpiderItemLoader(item=JobboleItem(), response=response)
         item_loader.add_xpath("title", '//div[@class="entry-header"]/h1/text()')
         item_loader.add_value("url", response.url)
         item_loader.add_value("url_object_id", get_md5(response.url))
