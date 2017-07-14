@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 import scrapy
-import re
 from scrapy.http import Request
 from urllib import parse
 from scrapyspider.items import JobboleItem
 from scrapyspider.utils.common_use_func import get_md5
 from scrapyspider.items import JobboleItemLoader
-import datetime
 
 
 class JobboleSpider(scrapy.Spider):
@@ -19,7 +17,6 @@ class JobboleSpider(scrapy.Spider):
         1.获取文章列表中的文章url交给scrapy下载后并解析函数解析
         2.获取下一页的url交给scrapy下载
         """
-
         # 获取文章列表中的文章url交给scrapy下载后并解析函数解析
         post_nodes = response.css("#archive .floated-thumb .post-thumb a")
         for post_node in post_nodes:
@@ -29,9 +26,9 @@ class JobboleSpider(scrapy.Spider):
                           callback=self.parse_detail)
 
         # 提取下一页，交给scrapy下载
-        next_urls = response.css(".next.page-numbers::attr(href)").extract_first("")
-        if next_urls:
-            yield Request(url=parse.urljoin(response.url, next_urls), callback=self.parse)
+        next_url = response.css(".next.page-numbers::attr(href)").extract_first("")
+        if next_url:
+            yield Request(url=parse.urljoin(response.url, next_url), callback=self.parse)
 
     def parse_detail(self, response):
         article_item = JobboleItem()

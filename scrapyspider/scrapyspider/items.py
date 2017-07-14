@@ -8,8 +8,8 @@
 import scrapy
 from scrapy.loader.processors import MapCompose, TakeFirst, Join
 from scrapy.loader import ItemLoader
-import datetime
-import re
+from scrapyspider.utils.common_use_func import date_type, get_nums, remove_comment_tags, \
+     return_value, join_str
 
 
 class ScrapyspiderItem(scrapy.Item):
@@ -21,41 +21,6 @@ class ScrapyspiderItem(scrapy.Item):
 class JobboleItemLoader(ItemLoader):
     #自定义itemloader
     default_output_processor = TakeFirst()
-
-
-def date_type(date):
-    date = date.strip().replace(" ·", "")
-    try:
-        create_date = datetime.datetime.strptime(date, "%Y%m%d").date()
-    except Exception as e:
-        create_date = datetime.datetime.now().date()
-    return create_date
-
-
-def get_nums(value):
-    value = value.strip()
-    match_re = re.match(".*?(\d+).*", value)
-    if match_re:
-        nums = int(match_re.group(1))
-    else:
-        nums = 0
-    return nums
-
-
-def remove_comment_tags(value):
-    # 去掉tag中提取的评论
-    if "评论" in value:
-        return ""
-    else:
-        return value
-
-
-def return_value(value):
-    return value
-
-
-def join_str(value):
-    return r"".join(str(i) for i in value)
 
 
 class JobboleItem(scrapy.Item):
@@ -95,7 +60,7 @@ class JobboleItem(scrapy.Item):
         """
         article_image_url = ""
         if self["front_image_url"]:
-            article_image_url = join_str(self["front_image_url"][0])
+            article_image_url = self["front_image_url"][0]
         params = (self["title"], self["url"], self["url_object_id"], self["praise_num"], self["fav_num"],
                   self["comments_num"], self["tags"], article_image_url, self["front_image_path"],
                   self["create_date"], self["content"])
