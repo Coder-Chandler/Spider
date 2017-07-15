@@ -8,7 +8,7 @@ import datetime
 from PIL import Image
 from urllib import parse
 from scrapyspider.items import ZhiHuQuestionItem, ZhiHuAnswerItem
-from scrapyspider.items import SpiderItemLoader
+from scrapy.loader import ItemLoader
 
 
 class ZhihuSpider(scrapy.Spider):
@@ -59,7 +59,7 @@ class ZhihuSpider(scrapy.Spider):
         match_re = re.match("(.*zhihu.com/question/(\d+))(/|$).*", response.url)
         if match_re:
             question_id = int(match_re.group(2))
-        item_loader = SpiderItemLoader(item=ZhiHuQuestionItem(), response=response)
+        item_loader = ItemLoader(item=ZhiHuQuestionItem(), response=response)
         item_loader.add_value("zhihu_id", question_id)
         item_loader.add_xpath("question_topics", "//div[@class='Popover']/div/text()")
         item_loader.add_value("question_url", response.url)
@@ -68,10 +68,13 @@ class ZhihuSpider(scrapy.Spider):
         item_loader.add_xpath("question_answer_num", "//h4[@class='List-headerText']/span/text()")
         item_loader.add_xpath("question_comments_num", "//div[@class='QuestionHeader-Comment']/button/text()")
         item_loader.add_xpath("question_watch_user_num", "//div[@class='NumberBoard-value']/text()")
-        # item_loader.add_xpath("question_follow_num", "//div[@class='NumberBoard-value']/text()")
+        item_loader.add_xpath("question_follow_num", "//div[@class='NumberBoard-value']/text()")
 
         question_item = item_loader.load_item()
-        yield scrapy.Request(self.start_answer_url.format(question_id, 20, 0), headers=self.headers,
+        question_item["question_create_date"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        question_item["question_update_date"] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        yield scrapy.Request(self.start_answer_url.format(question_id, 20, 0),
+                             meta={"question_item": question_item}, headers=self.headers,
                              callback=self.parse_answer)
         yield question_item
 
@@ -82,6 +85,7 @@ class ZhihuSpider(scrapy.Spider):
 
         for answer in ans_json["data"]:
             answer_item = ZhiHuAnswerItem()
+            question_item = ZhiHuQuestionItem()
             answer_item["zhihu_id"] = answer["id"]
             answer_item["answer_url"] = answer["url"]
             answer_item["question_id"] = answer["question"]["id"]
@@ -91,9 +95,13 @@ class ZhihuSpider(scrapy.Spider):
             answer_item["answer_comments_num"] = answer["comment_count"]
             answer_item["answer_create_date"] = answer["created_time"]
             answer_item["answer_update_date"] = answer["updated_time"]
-            answer_item["crawl_time"] = datetime.datetime.now()
+            # answer_item["answer_crawl_time"] = datetime.datetime.now()
+            # answer_item["answer_crawl_updatetime"] = datetime.datetime.now()
+            question_item["question_create_date"] = answer["question"]["created"]
+            question_item["question_update_date"] = answer["question"]["updated_time"]
 
             yield answer_item
+
         if is_end is not True:
             yield scrapy.Request(next_url, headers=self.headers, callback=self.parse_answer)
 

@@ -23,7 +23,12 @@ def date_type(date):
 
 def get_nums(value):
     # 对评论数，点赞数，收藏数进行过滤和判断
-    value = value.strip()
+    if type(value) == str:
+        value = value.strip()
+    elif type(value) == list:
+        value = "".join(str(i) for i in value)
+    elif type(value) == int:
+        return value
     match_re = re.match(".*?(\d+).*", value)
     if match_re:
         nums = int(match_re.group(1))
@@ -46,5 +51,9 @@ def return_value(value):
 
 def join_str(value):
     # 防止出现“: sequence item 0: expected str instance, bytes found”这一类的错误
-    return r"".join(str(i) for i in value)
-
+    if type(value) == int:
+        return value
+    elif type(value) == str:
+        return "".join(str(i) for i in value)
+    elif type(value) == list:
+        return "".join(str(i) for i in value)
