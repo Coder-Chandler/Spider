@@ -129,7 +129,8 @@ def get_work_years_max(value):
 
 def get_workaddr(value):
     addr = value.split("\n")
-    return addr
+    addr = [s.strip() for s in addr if s.strip() != '查看地图']
+    return ",".join(addr)
 
 
 def return_value(value):
