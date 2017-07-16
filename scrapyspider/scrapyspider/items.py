@@ -10,7 +10,7 @@ import datetime
 from scrapy.loader.processors import MapCompose, TakeFirst, Join
 from scrapy.loader import ItemLoader
 from scrapyspider.utils.common_use_func import date_type, get_nums, remove_comment_tags, \
-     return_value, join_str
+     return_value, join_str, remove_splash, publish_time, get_salary_min
 
 
 class ScrapyspiderItem(scrapy.Item):
@@ -19,7 +19,7 @@ class ScrapyspiderItem(scrapy.Item):
     pass
 
 
-class SpiderItemLoader(ItemLoader):
+class JobboleItemLoader(ItemLoader):
     #自定义itemloader
     default_output_processor = TakeFirst()
 
@@ -133,6 +133,11 @@ class ZhiHuQuestionItem(scrapy.Item):
         return insert_sql, params
 
 
+class LaGouItemLoader(ItemLoader):
+    #自定义itemloader
+    default_output_processor = TakeFirst()
+
+
 class ZhiHuAnswerItem(scrapy.Item):
     zhihu_id = scrapy.Field()
     answer_url = scrapy.Field()
@@ -174,3 +179,33 @@ class ZhiHuAnswerItem(scrapy.Item):
                   answer_crawl_updatetime)
 
         return insert_sql, params
+
+
+class LaGouJobItem(scrapy.Item):
+    url = scrapy.Field()
+    url_object_id = scrapy.Field()
+    title = scrapy.Field()
+    salary_min = scrapy.Field(
+        input_processor=MapCompose(get_salary_min)
+    )
+    salary_max = scrapy.Field(
+        input_processor=MapCompose(get_salary_min)
+    )
+    company_name = scrapy.Field()
+    job_city = scrapy.Field(
+        input_processor=MapCompose(remove_splash)
+    )
+    work_years_min = scrapy.Field()
+    work_years_max = scrapy.Field()
+    education_degree = scrapy.Field()
+    job_type = scrapy.Field()
+    publish_time = scrapy.Field(
+        input_processor=MapCompose(publish_time)
+    )
+    tags = scrapy.Field()
+    job_advantage = scrapy.Field()
+    job_desc = scrapy.Field()
+    job_addr = scrapy.Field()
+    company_url = scrapy.Field()
+    crwal_time = scrapy.Field()
+    crwal_update_time = scrapy.Field()

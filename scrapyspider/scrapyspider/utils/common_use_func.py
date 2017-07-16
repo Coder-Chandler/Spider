@@ -45,6 +45,33 @@ def remove_comment_tags(value):
         return value
 
 
+def remove_splash(value):
+    # 去掉斜线
+    return value.replace("/", "")
+
+
+def publish_time(value):
+    time = value.split()
+    time_value = time[0]
+    if '天前' in time_value:
+        time_value_ = re.match("\d+", time_value)
+        time_value = int(time_value_.group())
+        today = datetime.datetime.now()
+        publish_time_ = datetime.timedelta(days=time_value)
+        publish_time = today - publish_time_
+        return publish_time.strftime("%Y-%m-%d")
+    return time_value
+
+
+def get_salary_min(value):
+    if '-' in value:
+        value = value[0] + value[1]
+    elif '以上' in value:
+        value = value[0] + value[1]
+    return int(value)*1000
+
+
+
 def return_value(value):
     return value
 
