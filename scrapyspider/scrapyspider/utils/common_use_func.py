@@ -64,12 +64,72 @@ def publish_time(value):
 
 
 def get_salary_min(value):
+    # 获取最低工资并转换成int
+    value = value.replace(' ', '')
     if '-' in value:
-        value = value[0] + value[1]
+        match_re = re.match(".*?(\d+).*", value)
+        if match_re:
+            value = match_re.group(1)
     elif '以上' in value:
-        value = value[0] + value[1]
+        match_re = re.match(".*?(\d+).*", value)
+        if match_re:
+            value = match_re.group(1)
     return int(value)*1000
 
+
+def get_salary_max(value):
+    # 获取最高工资并转换成int
+    value = value.replace(' ', '')
+    if '-' in value:
+        value = value[4] + value[5]
+    elif '以上' in value:
+        value = 0
+    return int(value)*1000
+
+
+def get_work_years_min(value):
+    # 获取最低工作年限并转换成int
+    value = value.replace('/', '').replace(' ', '')
+    if '-' in value:
+        match_re = re.match(".*?(\d+).*", value)
+        if match_re:
+            value = match_re.group(1)
+    elif '以下' in value:
+        value = 0
+    elif '不限' in value:
+        value = 0
+    elif '以上' in value:
+        match_re = re.match(".*?(\d+).*", value)
+        if match_re:
+            value = match_re.group(1)
+    elif value == "应届毕业生":
+        value = 0
+    return int(value)
+
+
+def get_work_years_max(value):
+    # 获取最高工作年限并转换成int
+    value = value.replace('/', '').replace(' ', '')
+    if '-' in value:
+        match_re = re.match(".*-(\d+).*", value)
+        if match_re:
+            value = match_re.group(1)
+    elif '以下' in value:
+        match_re = re.match(".*?(\d+).*", value)
+        if match_re:
+            value = match_re.group(1)
+    elif '不限' in value:
+        value = 0
+    elif '以上' in value:
+        value = 0
+    elif value == "应届毕业生":
+        value = 0
+    return int(value)
+
+
+def get_workaddr(value):
+    addr = value.split("\n")
+    return addr
 
 
 def return_value(value):

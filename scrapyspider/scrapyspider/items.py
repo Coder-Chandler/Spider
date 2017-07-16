@@ -9,8 +9,10 @@ import scrapy
 import datetime
 from scrapy.loader.processors import MapCompose, TakeFirst, Join
 from scrapy.loader import ItemLoader
+from w3lib.html import remove_tags
 from scrapyspider.utils.common_use_func import date_type, get_nums, remove_comment_tags, \
-     return_value, join_str, remove_splash, publish_time, get_salary_min
+     return_value, join_str, remove_splash, publish_time, get_salary_min, get_salary_max, \
+     get_work_years_min, get_work_years_max, get_workaddr
 
 
 class ScrapyspiderItem(scrapy.Item):
@@ -189,15 +191,21 @@ class LaGouJobItem(scrapy.Item):
         input_processor=MapCompose(get_salary_min)
     )
     salary_max = scrapy.Field(
-        input_processor=MapCompose(get_salary_min)
+        input_processor=MapCompose(get_salary_max)
     )
     company_name = scrapy.Field()
     job_city = scrapy.Field(
         input_processor=MapCompose(remove_splash)
     )
-    work_years_min = scrapy.Field()
-    work_years_max = scrapy.Field()
-    education_degree = scrapy.Field()
+    work_years_min = scrapy.Field(
+        input_processor=MapCompose(get_work_years_min)
+    )
+    work_years_max = scrapy.Field(
+        input_processor=MapCompose(get_work_years_max)
+    )
+    education_degree = scrapy.Field(
+        input_processor=MapCompose(remove_splash)
+    )
     job_type = scrapy.Field()
     publish_time = scrapy.Field(
         input_processor=MapCompose(publish_time)
@@ -205,7 +213,9 @@ class LaGouJobItem(scrapy.Item):
     tags = scrapy.Field()
     job_advantage = scrapy.Field()
     job_desc = scrapy.Field()
-    job_addr = scrapy.Field()
+    job_addr = scrapy.Field(
+        input_processor=MapCompose(remove_tags)
+    )
     company_url = scrapy.Field()
     crwal_time = scrapy.Field()
     crwal_update_time = scrapy.Field()
