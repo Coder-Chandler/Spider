@@ -1,7 +1,7 @@
 import hashlib
 import re
 import datetime
-
+import time
 
 def get_md5(url):
     if isinstance(url, str):
@@ -51,8 +51,8 @@ def remove_splash(value):
 
 
 def publish_time(value):
-    time = value.split()
-    time_value = time[0]
+    time_list = value.split()
+    time_value = time_list[0]
     if '天前' in time_value:
         time_value_ = re.match("\d+", time_value)
         time_value = int(time_value_.group())
@@ -60,6 +60,8 @@ def publish_time(value):
         publish_time_ = datetime.timedelta(days=time_value)
         publish_time = today - publish_time_
         return publish_time.strftime("%Y-%m-%d")
+    elif ':' in time_value:
+        time_value = str(time.strftime("%Y-%m-%d-"))+time_value
     return time_value
 
 
@@ -128,9 +130,10 @@ def get_work_years_max(value):
 
 
 def get_workaddr(value):
+    # 利用w3lib.html的remove_tags函数删掉所有html标签后，再用本函数进行最终的地址提取
     addr = value.split("\n")
     addr = [s.strip() for s in addr if s.strip() != '查看地图']
-    return ",".join(addr)
+    return "".join(addr)
 
 
 def return_value(value):
