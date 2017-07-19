@@ -10,8 +10,8 @@ from utils.common_use_func import get_md5
 
 class LianjiaSpider(scrapy.Spider):
     name = 'lianjia'
-    allowed_domains = ['sh.lianjia.com/zufang/']
-    start_urls = ['http://sh.lianjia.com/zufang/']
+    allowed_domains = ['sh.lianjia.com/zufang']
+    start_urls = ['http://sh.lianjia.com/zufang']
 
     headers = {
         "HOST": "sh.lianjia.com/zufang",
@@ -29,11 +29,11 @@ class LianjiaSpider(scrapy.Spider):
             # match_re = re.match("(.*sh.lianjia.com/zufang/(\w[a-z]*$))", url)
             if match_re:
                 request_url = match_re.group(1)
-                yield scrapy.Request(request_url, headers=self.headers, callback=self.parse_detail)
+                yield scrapy.Request(request_url, headers=self.headers, callback=self.parse_lianjia)
             else:
                 yield scrapy.Request(url, headers=self.headers, callback=self.parse)
 
-    def parse_detail(self, response):
+    def parse_lianjia(self, response):
         item_loader = ItemLoader(item=LianJiaItem(), response=response)
         item_loader.add_value("url", response.url)
         item_loader.add_value("url_object_id", get_md5(response.url))
@@ -51,6 +51,7 @@ class LianjiaSpider(scrapy.Spider):
         item_loader.add_value("crwal_time", datetime.datetime.now())
         item_loader.add_value("crwal_update_time", datetime.datetime.now())
 
+        lianjia = item_loader.load_item()
         Latitude_longitude = response.xpath("//a[@id='actshowMap_xiaoqu']/@xiaoqu").extract()[0]  # [121.578972, 31.24942342, '金杨四街坊'](左经度，右纬度)
 
         pass
