@@ -3,6 +3,7 @@ import re
 import datetime
 import time
 
+
 def get_md5(url):
     if isinstance(url, str):
         url = url.encode("utf-8")
