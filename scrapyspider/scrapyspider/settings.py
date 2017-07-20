@@ -54,9 +54,15 @@ COOKIES_ENABLED = False
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'scrapyspider.middlewares.MyCustomDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   # 'scrapyspider.middlewares.MyCustomDownloaderMiddleware': 543,
+     'scrapyspider.middlewares.RandomUserAgentMiddleware': 1,
+     # 'scrapyspider.middlewares.RandomProxyMiddleware': 2,
+     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+}
+
+USER_AGENT = "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) " \
+             "Ubuntu Chromium/58.0.3029.110 Chrome/58.0.3029.110 Safari/537.36"
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
@@ -90,7 +96,7 @@ AUTOTHROTTLE_MAX_DELAY = 60
 AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
 # Enable showing throttling stats for every response received:
 AUTOTHROTTLE_DEBUG = False
-DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 0.5
 
 # Enable and configure HTTP caching (disabled by default)
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
