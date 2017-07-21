@@ -70,6 +70,7 @@ def get_salary_min(value):
     # 获取最低工资并转换成int
     value = value.replace(' ', '')
     if '-' in value:
+        value = value.split("-")[0]
         match_re = re.match(".*?(\d+).*", value)
         if match_re:
             value = match_re.group(1)
@@ -84,7 +85,10 @@ def get_salary_max(value):
     # 获取最高工资并转换成int
     value = value.replace(' ', '')
     if '-' in value:
-        value = value[4] + value[5]
+        value = value.split("-")[1]
+        match_re = re.match(".*?(\d+).*", value)
+        if match_re:
+            value = match_re.group(1)
     elif '以上' in value:
         value = 0
     return int(value)*1000

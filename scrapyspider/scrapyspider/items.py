@@ -263,6 +263,11 @@ class LaGouJobItem(scrapy.Item):
         return insert_sql, params
 
 
+class LianJiaItemLoader(ItemLoader):
+    #自定义itemloader
+    default_output_processor = TakeFirst()
+
+
 class LianJiaItem(scrapy.Item):
     url = scrapy.Field()
     url_object_id = scrapy.Field()
@@ -282,42 +287,35 @@ class LianJiaItem(scrapy.Item):
 
     def get_insert_sql(self):
         insert_sql = """
-            insert into lagou_job(url, url_object_id, title, salary_min, salary_max,
-                                    company_name, job_city, work_years_min, work_years_max,
-                                    education_degree, job_type, publish_time, tags, job_advantage,
-                                    job_desc, job_addr, company_url, crwal_time, crwal_update_time)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) 
+            insert into lianjia(url, url_object_id, residential_district_name, 
+                                residential_district_url, region, address, house_area,
+                                room_count, face_direction, rent_price, floor, publish_time,
+                                total_watch_count, crwal_time, crwal_update_time
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) 
             ON DUPLICATE KEY UPDATE url=VALUES(url), url_object_id=VALUES(url_object_id), 
-            title=VALUES(title), salary_min=VALUES(salary_min), salary_max=VALUES(salary_max), 
-            company_name=VALUES(company_name), job_city=VALUES(job_city), work_years_min=VALUES(work_years_min), 
-            work_years_max=VALUES(work_years_max), education_degree=VALUES(education_degree),
-            job_type=VALUES(job_type), publish_time=VALUES(publish_time), tags=VALUES(tags),
-            job_advantage=VALUES(job_advantage), job_desc=VALUES(job_desc), job_addr=VALUES(job_addr),
-            company_url=VALUES(company_url), crwal_update_time=VALUES(crwal_update_time)
+            house_area=VALUES(house_area), room_count=VALUES(room_count), face_direction=VALUES(face_direction), 
+            rent_price=VALUES(rent_price), floor=VALUES(floor), total_watch_count=VALUES(total_watch_count), 
+            crwal_update_time=VALUES(crwal_update_time)
         """
         url = self["url"]
         url_object_id = self["url_object_id"]
-        title = self["title"]
-        salary_min = self["salary_min"]
-        salary_max = self["salary_max"]
-        company_name = self["company_name"]
-        job_city = self["job_city"]
-        work_years_min = self["work_years_min"]
-        work_years_max = self["work_years_max"]
-        education_degree = self["education_degree"]
-        job_type = self["job_type"]
+        residential_district_name = self["residential_district_name"]
+        residential_district_url = self["residential_district_url"]
+        region = self["region"]
+        address = self["address"]
+        house_area = self["house_area"]
+        room_count = self["room_count"]
+        face_direction = self["face_direction"]
+        rent_price = self["rent_price"]
+        floor = self["floor"]
         publish_time = self["publish_time"]
-        tags = self["tags"]
-        job_advantage = self["job_advantage"]
-        job_desc = self["job_desc"]
-        job_addr = self["job_addr"]
-        company_url = self["company_url"]
+        total_watch_count = self["total_watch_count"]
         crwal_time = self["crwal_time"]
         crwal_update_time = self["crwal_update_time"]
 
-        params = (url, url_object_id, title, salary_min, salary_max, company_name, job_city,
-                  work_years_min, work_years_max, education_degree, job_type,
-                  publish_time, tags, job_advantage, job_desc, job_addr, company_url,
-                  crwal_time, crwal_update_time)
+        params = (url, url_object_id, residential_district_name,
+                  residential_district_url, region, address, house_area,
+                  room_count, face_direction, rent_price, floor, publish_time,
+                  total_watch_count, crwal_time, crwal_update_time)
 
         return insert_sql, params

@@ -28,8 +28,10 @@ class LagoujobSpider(scrapy.Spider):
             if match_re:
                 request_url = match_re.group(1)
                 yield scrapy.Request(request_url, headers=self.headers, callback=self.parse_detail)
+                break
             else:
-                yield scrapy.Request(url, headers=self.headers, callback=self.parse)
+                # yield scrapy.Request(url, headers=self.headers, callback=self.parse)
+                pass
 
     def parse_detail(self, response):
         item_loader = LaGouItemLoader(item=LaGouJobItem(), response=response)
