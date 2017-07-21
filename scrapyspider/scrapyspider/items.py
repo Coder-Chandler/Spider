@@ -297,19 +297,19 @@ class LianJiaItem(scrapy.Item):
             rent_price=VALUES(rent_price), floor=VALUES(floor), total_watch_count=VALUES(total_watch_count), 
             crwal_update_time=VALUES(crwal_update_time)
         """
-        url = self["url"]
-        url_object_id = self["url_object_id"]
-        residential_district_name = self["residential_district_name"]
-        residential_district_url = self["residential_district_url"]
-        region = self["region"]
-        address = self["address"]
-        house_area = self["house_area"]
-        room_count = self["room_count"]
-        face_direction = self["face_direction"]
-        rent_price = self["rent_price"]
-        floor = self["floor"]
-        publish_time = self["publish_time"]
-        total_watch_count = self["total_watch_count"]
+        url = self["url"][0]
+        url_object_id = self["url_object_id"][0]
+        residential_district_name = self["residential_district_name"][0]
+        residential_district_url = self["residential_district_url"][0]
+        region = ",".join(self["region"])
+        address = self["address"][0]
+        house_area = int("".join(self["house_area"]))
+        room_count = ",".join(self["room_count"])
+        face_direction = "".join(self["face_direction"]).strip()
+        rent_price = int("".join(self["rent_price"]))
+        floor = self["floor"][0]
+        publish_time = self["publish_time"][0]
+        total_watch_count = int("".join(self["total_watch_count"]))
         crwal_time = self["crwal_time"]
         crwal_update_time = self["crwal_update_time"]
 

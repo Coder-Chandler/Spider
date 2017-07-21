@@ -4,7 +4,11 @@ import re
 import datetime
 from urllib import parse
 from items import LianJiaItem,LianJiaItemLoader
+from scrapy.loader import ItemLoader
 from utils.common_use_func import get_md5
+from selenium import webdriver
+from scrapy.xlib.pydispatch import dispatcher
+from scrapy import signals
 
 
 class LianjiaSpider(scrapy.Spider):
@@ -23,6 +27,16 @@ class LianjiaSpider(scrapy.Spider):
         "COOKIES_ENABLED": False
     }
 
+    def __init__(self):
+        self.browser = webdriver.Chrome(executable_path="/home/chandler/github/Spider/chromedriver")
+        super(LianjiaSpider, self).__init__()
+        dispatcher.connect(self.spider_closed, signals.spider_closed)
+
+    def spider_closed(self, spider):
+        # 爬虫退出，关闭chrome
+        print("spider closed")
+        self.browser.quit()
+
     def parse(self, response):
         all_urls = response.xpath("//a/@href").extract()
         all_urls = [parse.urljoin(response.url, url) for url in all_urls]
@@ -39,7 +53,7 @@ class LianjiaSpider(scrapy.Spider):
                 pass
 
     def parse_lianjia(self, response):
-        item_loader = LianJiaItemLoader(item=LianJiaItem(), response=response)
+        item_loader = ItemLoader(item=LianJiaItem(), response=response)
         item_loader.add_value("url", response.url)
         item_loader.add_value("url_object_id", get_md5(response.url))
         item_loader.add_css("residential_district_name", "table.aroundInfo tr:nth-child(3) td:nth-child(2) p a::text")

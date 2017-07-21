@@ -5,6 +5,8 @@
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/spider-middleware.html
 import logging
+import time
+from scrapy.http import HtmlResponse
 from scrapy import signals
 from fake_useragent import UserAgent
 from tools.xici_ip import GetIP
@@ -101,3 +103,13 @@ class RandomProxyMiddleware(object):
         get_ip = GetIP()
         request.meta["proxy"] = get_ip.get_random_ip()
 
+
+class JSPageMiddleware(object):
+    # 通过chrome请求动态网页
+    def process_request(self, request, spider):
+        spider.browser.get(request.url)
+        time.sleep(2)
+        print("访问{0}".format(request.url))
+
+        return HtmlResponse(url=spider.browser.current_url, body=spider.browser.page_source, encoding="utf-8",
+                            request=request)

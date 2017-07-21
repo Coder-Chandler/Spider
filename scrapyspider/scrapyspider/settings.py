@@ -56,9 +56,10 @@ COOKIES_ENABLED = False
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
    # 'scrapyspider.middlewares.MyCustomDownloaderMiddleware': 543,
-     'scrapyspider.middlewares.RandomUserAgentMiddleware': 1,
+   #   'scrapyspider.middlewares.RandomUserAgentMiddleware': 1,
+     'scrapyspider.middlewares.JSPageMiddleware': 1,
      # 'scrapyspider.middlewares.RandomProxyMiddleware': 2,
-     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+     # 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
 }
 
 USER_AGENT = "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) " \
