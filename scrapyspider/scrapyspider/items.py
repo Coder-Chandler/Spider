@@ -290,7 +290,7 @@ class LianJiaItem(scrapy.Item):
             insert into lianjia(url, url_object_id, residential_district_name, 
                                 residential_district_url, region, address, house_area,
                                 room_count, face_direction, rent_price, floor, publish_time,
-                                total_watch_count, crwal_time, crwal_update_time
+                                total_watch_count, crwal_time, crwal_update_time)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) 
             ON DUPLICATE KEY UPDATE url=VALUES(url), url_object_id=VALUES(url_object_id), 
             house_area=VALUES(house_area), room_count=VALUES(room_count), face_direction=VALUES(face_direction), 
@@ -310,8 +310,8 @@ class LianJiaItem(scrapy.Item):
         floor = self["floor"][0]
         publish_time = self["publish_time"][0]
         total_watch_count = int("".join(self["total_watch_count"]))
-        crwal_time = self["crwal_time"]
-        crwal_update_time = self["crwal_update_time"]
+        crwal_time = datetime.datetime.now()
+        crwal_update_time = datetime.datetime.now()
 
         params = (url, url_object_id, residential_district_name,
                   residential_district_url, region, address, house_area,

@@ -67,8 +67,6 @@ class LianjiaSpider(scrapy.Spider):
         item_loader.add_css("floor", "table.aroundInfo tr td:nth-child(2)::text")
         item_loader.add_css("publish_time", "table.aroundInfo tr:nth-child(2) td:nth-child(4)::text")
         item_loader.add_css("total_watch_count", ".totalCount span::text")
-        item_loader.add_value("crwal_time", datetime.datetime.now())
-        item_loader.add_value("crwal_update_time", datetime.datetime.now())
 
         lianjia = item_loader.load_item()
         yield lianjia
