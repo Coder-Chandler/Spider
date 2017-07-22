@@ -9,6 +9,8 @@ from PIL import Image
 from urllib import parse
 from scrapyspider.items import ZhiHuQuestionItem, ZhiHuAnswerItem
 from scrapy.loader import ItemLoader
+from scrapy.xlib.pydispatch import dispatcher
+from scrapy import signals
 
 
 class ZhihuSpider(scrapy.Spider):
@@ -19,6 +21,8 @@ class ZhihuSpider(scrapy.Spider):
     headers = {
         "HOST": "www.zhihu.com",
         "Referer": "https://www.zhizhu.com",
+        "Authorization": "Bearer Mi4wQUREQWlJMkY5QWtBWUFJWGZCUHRDeGNBQUFCaEFsVk5WUDZQV1FBU0ZRcGMybVFReDB"
+                         "WbjNsRzN4R3QzcjdqTGZn|1500016980|81289be24b3158df44a24d22e9e682cd1ad3e76c",
         'User-Agent': "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "Ubuntu Chromium/58.0.3029.110 Chrome/58.0.3029.110 Safari/537.36"
     }
@@ -40,7 +44,20 @@ class ZhihuSpider(scrapy.Spider):
                        "follower_count%2Cbadge%5B%3F%28type%3Dbest_" \
                        "answerer%29%5D.topics&limit={1}&offset={2}"
 
+    handle_httpstatus_list = [401]
+
+    def __init__(self):
+        self.fail_urls = []
+        dispatcher.connect(self.handle_spider_closed, signals.spider_closed)
+
+    def handle_spider_closed(self, spider, reason):
+        self.crawler.stats.set_value("failed_urls", ",".join(self.fail_urls))
+
     def parse(self, response):
+        if response.status == 401:
+            self.fail_urls.append(response.url)
+            self.crawler.stats.inc_value("failed_url")
+
         all_urls = response.css("a::attr(href)").extract()
         all_urls = [parse.urljoin(response.url, url) for url in all_urls]
         all_urls = filter(lambda x: True if x.startswith("https") else False, all_urls)

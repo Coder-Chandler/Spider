@@ -26,17 +26,17 @@ class LianjiaSpider(scrapy.Spider):
     }
 
     custom_settings = {
-        "COOKIES_ENABLED": True
+        "COOKIES_ENABLED": False
     }
-    # def __init__(self):
-    #     self.browser = webdriver.Chrome(executable_path="/home/chandler/github/Spider/chromedriver")
-    #     super(LianjiaSpider, self).__init__()
-    #     dispatcher.connect(self.spider_closed, signals.spider_closed)
-    #
-    # def spider_closed(self, spider):
-    #     # 爬虫退出，关闭chrome
-    #     print("spider closed")
-    #     self.browser.quit()
+    def __init__(self):
+        self.browser = webdriver.Chrome(executable_path="/home/chandler/github/Spider/chromedriver")
+        super(LianjiaSpider, self).__init__()
+        dispatcher.connect(self.spider_closed, signals.spider_closed)
+
+    def spider_closed(self, spider):
+        # 爬虫退出，关闭chrome
+        print("spider closed")
+        self.browser.quit()
 
     def parse(self, response):
         all_urls = response.xpath("//a/@href").extract()
@@ -48,10 +48,9 @@ class LianjiaSpider(scrapy.Spider):
             if match_re:
                 request_url = match_re.group(1)
                 yield scrapy.Request(request_url, headers=self.headers, callback=self.parse_lianjia)
-                break
             else:
-                # yield scrapy.Request(url, headers=self.headers, callback=self.parse)
-                pass
+                yield scrapy.Request(url, headers=self.headers, callback=self.parse)
+
 
     def parse_lianjia(self, response):
         item_loader = ItemLoader(item=LianJiaItem(), response=response)

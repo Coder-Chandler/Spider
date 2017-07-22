@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from items import LaGouItemLoader, LaGouJobItem
 from utils.common_use_func import get_md5
 from urllib import parse
+from selenium import webdriver
+from scrapy.xlib.pydispatch import dispatcher
+from scrapy import signals
+from items import LaGouJobItem, LaGouItemLoader
 import datetime
 import re
 
@@ -15,9 +18,21 @@ class LagoujobSpider(scrapy.Spider):
     headers = {
         "HOST": "www.lagou.com",
         "Referer": "https://www.lagou.com",
+        "Authorization": "Bearer Mi4wQUREQWlJMkY5QWtBWUFJWGZCUHRDeGNBQUFCaEFsVk5WUDZQV1FBU0ZRcGMybVFReDB"
+                         "WbjNsRzN4R3QzcjdqTGZn|1500016980|81289be24b3158df44a24d22e9e682cd1ad3e76c",
         'User-Agent': "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "Ubuntu Chromium/58.0.3029.110 Chrome/58.0.3029.110 Safari/537.36"
     }
+
+    # def __init__(self):
+    #     self.browser = webdriver.Chrome(executable_path="/home/chandler/github/Spider/chromedriver")
+    #     super(LagoujobSpider, self).__init__()
+    #     dispatcher.connect(self.spider_closed, signals.spider_closed)
+    #
+    # def spider_closed(self, spider):
+    #     # 爬虫退出，关闭chrome
+    #     print("spider closed")
+    #     self.browser.quit()
 
     def parse(self, response):
         all_urls = response.xpath("//a/@href").extract()
@@ -28,10 +43,8 @@ class LagoujobSpider(scrapy.Spider):
             if match_re:
                 request_url = match_re.group(1)
                 yield scrapy.Request(request_url, headers=self.headers, callback=self.parse_detail)
-                break
             else:
-                # yield scrapy.Request(url, headers=self.headers, callback=self.parse)
-                pass
+                yield scrapy.Request(url, headers=self.headers, callback=self.parse)
 
     def parse_detail(self, response):
         item_loader = LaGouItemLoader(item=LaGouJobItem(), response=response)
