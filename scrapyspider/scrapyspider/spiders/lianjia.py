@@ -19,23 +19,24 @@ class LianjiaSpider(scrapy.Spider):
     headers = {
         "HOST": "sh.lianjia.com/zufang/",
         "Referer": "http://sh.lianjia.com/zufang/",
+        "Authorization": "Bearer Mi4wQUREQWlJMkY5QWtBWUFJWGZCUHRDeGNBQUFCaEFsVk5WUDZQV1FBU0ZRcGMybVFReDB"
+                         "WbjNsRzN4R3QzcjdqTGZn|1500016980|81289be24b3158df44a24d22e9e682cd1ad3e76c",
         'User-Agent': "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "Ubuntu Chromium/58.0.3029.110 Chrome/58.0.3029.110 Safari/537.36"
     }
 
     custom_settings = {
-        "COOKIES_ENABLED": False
+        "COOKIES_ENABLED": True
     }
-
-    def __init__(self):
-        self.browser = webdriver.Chrome(executable_path="/home/chandler/github/Spider/chromedriver")
-        super(LianjiaSpider, self).__init__()
-        dispatcher.connect(self.spider_closed, signals.spider_closed)
-
-    def spider_closed(self, spider):
-        # 爬虫退出，关闭chrome
-        print("spider closed")
-        self.browser.quit()
+    # def __init__(self):
+    #     self.browser = webdriver.Chrome(executable_path="/home/chandler/github/Spider/chromedriver")
+    #     super(LianjiaSpider, self).__init__()
+    #     dispatcher.connect(self.spider_closed, signals.spider_closed)
+    #
+    # def spider_closed(self, spider):
+    #     # 爬虫退出，关闭chrome
+    #     print("spider closed")
+    #     self.browser.quit()
 
     def parse(self, response):
         all_urls = response.xpath("//a/@href").extract()

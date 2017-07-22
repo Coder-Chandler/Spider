@@ -36,7 +36,7 @@ ROBOTSTXT_OBEY = False
 
 # Disable cookies (enabled by default)
 COOKIES_ENABLED = False
-
+# COOKIES_DEBUG = True
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
 
@@ -51,15 +51,16 @@ COOKIES_ENABLED = False
 #SPIDER_MIDDLEWARES = {
 #    'scrapyspider.middlewares.ScrapyspiderSpiderMiddleware': 543,
 #}
-
+DUPEFILTER_DEBUG = True
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
    # 'scrapyspider.middlewares.MyCustomDownloaderMiddleware': 543,
-   #   'scrapyspider.middlewares.RandomUserAgentMiddleware': 1,
-     'scrapyspider.middlewares.JSPageMiddleware': 1,
+     'scrapyspider.middlewares.RandomUserAgentMiddleware': 1,
+   #   'scrapyspider.middlewares.JSPageMiddleware': 1,
      # 'scrapyspider.middlewares.RandomProxyMiddleware': 2,
-     # 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+     # 'scrapy.contrib.downloadermiddleware.cookies.CookiesMiddleware': 700,
+     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
 }
 
 USER_AGENT = "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) " \
@@ -97,7 +98,7 @@ AUTOTHROTTLE_MAX_DELAY = 60
 AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
 # Enable showing throttling stats for every response received:
 AUTOTHROTTLE_DEBUG = False
-DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 5
 
 # Enable and configure HTTP caching (disabled by default)
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
@@ -107,7 +108,8 @@ DOWNLOAD_DELAY = 3
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-MYSQL_HOST = "192.168.1.103"
+MYSQL_HOST = "192.168.1.104"
 MYSQL_DBNAME = "spider"
 MYSQL_USER = "root"
 MYSQL_PASSWORD = "root"
+
