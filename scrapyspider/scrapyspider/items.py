@@ -12,7 +12,7 @@ from scrapy.loader import ItemLoader
 from w3lib.html import remove_tags
 from scrapyspider.utils.common_use_func import date_type, get_nums, remove_comment_tags, \
      return_value, join_str, remove_splash, publish_time, get_salary_min, get_salary_max, \
-     get_work_years_min, get_work_years_max, get_workaddr
+     get_work_years_min, get_work_years_max, get_workaddr, get_longitude, get_latitude
 
 
 class ScrapyspiderItem(scrapy.Item):
@@ -270,7 +270,7 @@ class LianJiaItemLoader(ItemLoader):
 
 class LianJiaItem(scrapy.Item):
     url = scrapy.Field()
-    url_object_id = scrapy.Field()
+    lianjia_id = scrapy.Field()
     residential_district_name = scrapy.Field()
     residential_district_url = scrapy.Field()
     region = scrapy.Field()
@@ -287,20 +287,21 @@ class LianJiaItem(scrapy.Item):
 
     def get_insert_sql(self):
         insert_sql = """
-            insert into lianjia(url, url_object_id, residential_district_name, 
-                                residential_district_url, region, address, house_area,
-                                room_count, face_direction, rent_price, floor, publish_time,
-                                total_watch_count, crwal_time, crwal_update_time)
+            insert into lianjia(url, lianjia_id, residential_district_name, 
+                                residential_district_url, region,
+                                address, house_area, room_count, face_direction, 
+                                rent_price, floor, publish_time, total_watch_count, 
+                                crwal_time, crwal_update_time)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) 
-            ON DUPLICATE KEY UPDATE url=VALUES(url), url_object_id=VALUES(url_object_id), 
+            ON DUPLICATE KEY UPDATE url=VALUES(url), lianjia_id=VALUES(lianjia_id), 
             house_area=VALUES(house_area), room_count=VALUES(room_count), face_direction=VALUES(face_direction), 
             rent_price=VALUES(rent_price), floor=VALUES(floor), total_watch_count=VALUES(total_watch_count), 
             crwal_update_time=VALUES(crwal_update_time)
         """
         url = self["url"][0]
-        url_object_id = self["url_object_id"][0]
+        lianjia_id = self["lianjia_id"][0]
         residential_district_name = self["residential_district_name"][0]
-        residential_district_url = self["residential_district_url"][0]
+        residential_district_url = self["residential_district_url"]
         region = ",".join(self["region"])
         address = self["address"][0]
         house_area = int("".join(self["house_area"]))
@@ -313,9 +314,46 @@ class LianJiaItem(scrapy.Item):
         crwal_time = datetime.datetime.now()
         crwal_update_time = datetime.datetime.now()
 
-        params = (url, url_object_id, residential_district_name,
-                  residential_district_url, region, address, house_area,
-                  room_count, face_direction, rent_price, floor, publish_time,
-                  total_watch_count, crwal_time, crwal_update_time)
+        params = (url, lianjia_id, residential_district_name,
+                  residential_district_url, region, address, house_area, room_count,
+                  face_direction, rent_price, floor, publish_time, total_watch_count,
+                  crwal_time, crwal_update_time)
+
+        return insert_sql, params
+
+
+class LianJia_latitude_longitude(scrapy.Item):
+    residential_district_name = scrapy.Field()
+    residential_district_url = scrapy.Field()
+    lianjia_id = scrapy.Field()
+    longitude = scrapy.Field(
+        input_processor=MapCompose(get_longitude)
+    )
+    latitude = scrapy.Field(
+        input_processor=MapCompose(get_latitude)
+    )
+    crwal_time = scrapy.Field()
+    crwal_update_time = scrapy.Field()
+
+    def get_insert_sql(self):
+        insert_sql = """
+                insert into LianJia_latitude_longitude(lianjia_id, residential_district_name, 
+                                                       residential_district_url, longitude, latitude, 
+                                                       crwal_time, crwal_update_time)
+                VALUES (%s, %s, %s, %s, %s, %s, %s) 
+                ON DUPLICATE KEY UPDATE residential_district_name=VALUES(residential_district_name),
+                residential_district_url=VALUES(residential_district_url), lianjia_id=VALUES(lianjia_id),
+                longitude=VALUES(longitude), latitude=VALUES(latitude), crwal_update_time=VALUES(crwal_update_time)
+            """
+        residential_district_name = self["residential_district_name"]
+        residential_district_url = self["residential_district_url"]
+        lianjia_id = self["lianjia_id"]
+        longitude = self["longitude"][0]
+        latitude = self["latitude"][0]
+        crwal_time = datetime.datetime.now()
+        crwal_update_time = datetime.datetime.now()
+
+        params = (lianjia_id, residential_district_name, residential_district_url,
+                  longitude, latitude, crwal_time, crwal_update_time)
 
         return insert_sql, params

@@ -34,6 +34,15 @@ class LagoujobSpider(scrapy.Spider):
     #     print("spider closed")
     #     self.browser.quit()
 
+    handle_httpstatus_list = [401]
+
+    def __init__(self):
+        self.fail_urls = []
+        dispatcher.connect(self.handle_spider_closed, signals.spider_closed)
+
+    def handle_spider_closed(self, spider, reason):
+        self.crawler.stats.set_value("failed_urls", ",".join(self.fail_urls))
+
     def parse(self, response):
         all_urls = response.xpath("//a/@href").extract()
         all_urls = [parse.urljoin(response.url, url) for url in all_urls]

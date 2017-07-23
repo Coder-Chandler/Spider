@@ -2,6 +2,7 @@ import hashlib
 import re
 import datetime
 import time
+from urllib import parse
 
 
 def get_md5(url):
@@ -109,7 +110,7 @@ def get_work_years_min(value):
         match_re = re.match(".*?(\d+).*", value)
         if match_re:
             value = match_re.group(1)
-    elif value == "应届毕业生":
+    elif "应届毕业生" in value:
         value = 0
     return int(value)
 
@@ -153,3 +154,28 @@ def join_str(value):
         return "".join(str(i) for i in value)
     elif type(value) == list:
         return "".join(str(i) for i in value)
+
+
+def get_longitude(value):
+    match_re = re.match(".*?(\d+.\d+).*", value)
+    if match_re:
+        nums = float(match_re.group(1))*1.0
+    else:
+        nums = 0
+    return nums
+# print(get_longitude('121.12343124,31.1231231232'))
+
+
+def get_latitude(value):
+    match_re = re.match(".*?( \d+.\d+).*", value)
+    if match_re:
+        nums = float(match_re.group(1))*1.0
+    else:
+        nums = 0
+    return nums
+# print(get_latitude('121.12343124, 31.1231231232, gfdg'))
+
+# s='http://sh.lianjia.com/xiaoqu/5011102208580.html'
+# x='http://sh.lianjia.com/zufang/shz4072292.html'
+# match_re = re.match("(.*sh.lianjia.com/zufang/(\w*\d*)(.html$))", s)
+# print(match_re.group(1))

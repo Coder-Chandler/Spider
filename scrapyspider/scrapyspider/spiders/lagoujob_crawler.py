@@ -4,6 +4,8 @@ from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 from items import LaGouItemLoader, LaGouJobItem
 from utils.common_use_func import get_md5
+from scrapy.xlib.pydispatch import dispatcher
+from scrapy import signals
 import datetime
 
 
@@ -21,12 +23,20 @@ class LagoujobCrawlerSpider(CrawlSpider):
     headers = {
         "HOST": "www.lagou.com",
         "Referer": "https://www.lagou.com",
+        "Authorization": "Bearer Mi4wQUREQWlJMkY5QWtBWUFJWGZCUHRDeGNBQUFCaEFsVk5WUDZQV1FBU0ZRcGMybVFReDB"
+                         "WbjNsRzN4R3QzcjdqTGZn|1500016980|81289be24b3158df44a24d22e9e682cd1ad3e76c",
         'User-Agent': "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "Ubuntu Chromium/58.0.3029.110 Chrome/58.0.3029.110 Safari/537.36"
     }
 
-    # def parse_start_url(self, response):
-    #     return [scrapy.Request("https://www.lagou.com/zhaopin/", headers=self.headers, callback=self.parse_job)]
+    # handle_httpstatus_list = [401]
+    #
+    # def __init__(self):
+    #     self.fail_urls = []
+    #     dispatcher.connect(self.handle_spider_closed, signals.spider_closed)
+    #
+    # def handle_spider_closed(self, spider, reason):
+    #     self.crawler.stats.set_value("failed_urls", ",".join(self.fail_urls))
 
     def parse_job(self, response):
         item_loader = LaGouItemLoader(item=LaGouJobItem(), response=response)
