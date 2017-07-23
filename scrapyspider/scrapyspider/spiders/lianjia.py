@@ -39,6 +39,8 @@ class LianjiaSpider(scrapy.Spider):
         chrome_opt.add_experimental_option("prefs", prefs)
         self.browser = webdriver.Chrome(executable_path="/home/chandler/github/Spider/chromedriver",
                                         chrome_options=chrome_opt)
+        self.browser.implicitly_wait(10)  # 设置超时时间
+        self.browser.set_page_load_timeout(10)  # 设置超时时间
         dispatcher.connect(self.spider_closed, signals.spider_closed)
 
     def spider_closed(self, spider):
@@ -56,10 +58,9 @@ class LianjiaSpider(scrapy.Spider):
             if match_re:
                 request_url = match_re.group(1)
                 yield scrapy.Request(request_url, headers=self.headers, callback=self.parse_lianjia)
-                break
+
             else:
-                # yield scrapy.Request(url, headers=self.headers, callback=self.parse
-                pass
+                yield scrapy.Request(url, headers=self.headers, callback=self.parse)
 
     def parse_lianjia(self, response):
         lianjia_id = 0
