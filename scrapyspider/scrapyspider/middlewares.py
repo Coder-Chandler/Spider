@@ -108,7 +108,7 @@ class JSPageMiddleware(object):
     # 通过chrome请求动态网页
     def process_request(self, request, spider):
         spider.browser.get(request.url)
-        # time.sleep(1)
+        time.sleep(1)
         print("访问{0}".format(request.url))
 
         return HtmlResponse(url=spider.browser.current_url, body=spider.browser.page_source, encoding="utf-8",

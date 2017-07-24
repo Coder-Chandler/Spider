@@ -6,14 +6,16 @@ from selenium import webdriver
 from scrapy.xlib.pydispatch import dispatcher
 from scrapy import signals
 from items import LaGouJobItem, LaGouItemLoader
+from scrapy_redis.spiders import RedisSpider
 import datetime
 import re
 
 
-class LagoujobSpider(scrapy.Spider):
+class LagoujobSpider(RedisSpider):
     name = 'lagoujob'
     allowed_domains = ['www.lagou.com']
-    start_urls = ['https://www.lagou.com/']
+    redis_key = 'lagoujob:start_urls'
+    # start_urls = ['https://www.lagou.com/']
 
     headers = {
         "HOST": "www.lagou.com",

@@ -56,11 +56,11 @@ COOKIES_ENABLED = False
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
    # 'scrapyspider.middlewares.MyCustomDownloaderMiddleware': 543,
-   #   'scrapyspider.middlewares.RandomUserAgentMiddleware': 1,
-     'scrapyspider.middlewares.JSPageMiddleware': 1,
+     'scrapyspider.middlewares.RandomUserAgentMiddleware': 1,
+   #   'scrapyspider.middlewares.JSPageMiddleware': 1,
      # 'scrapyspider.middlewares.RandomProxyMiddleware': 2,
      # 'scrapy.contrib.downloadermiddleware.cookies.CookiesMiddleware': 700,
-     # 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
 }
 
 USER_AGENT = "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) " \
@@ -78,6 +78,7 @@ ITEM_PIPELINES = {
    # 'scrapyspider.pipelines.JsonExporterPipeline': 2,
    # 'scrapyspider.pipelines.ArticleImagePipeline': 2,
    'scrapyspider.pipelines.MysqlTwistedPipeline': 1,
+   'scrapy_redis.pipelines.RedisPipeline': 200
 }
 IMAGES_URLS_FIELD = "front_image_url"
 project_dir = os.path.abspath(os.path.dirname(__file__))
@@ -98,7 +99,7 @@ AUTOTHROTTLE_MAX_DELAY = 60
 AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
 # Enable showing throttling stats for every response received:
 AUTOTHROTTLE_DEBUG = False
-# DOWNLOAD_DELAY = 1
+DOWNLOAD_DELAY = 1
 
 # Enable and configure HTTP caching (disabled by default)
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
@@ -113,3 +114,8 @@ MYSQL_DBNAME = "spider"
 MYSQL_USER = "root"
 MYSQL_PASSWORD = "root"
 
+# Enables scheduling storing requests queue in redis.
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+# Ensure all spiders share same duplicates filter through redis.
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+REDIS_URL = 'redis://root:myredis@127.0.0.1:6379'
