@@ -180,15 +180,12 @@ def get_latitude(value):
 # match_re = re.match("(.*sh.lianjia.com/zufang/(shz\d*)(.html$))", x)
 # print(match_re.group(1))
 #
-s=['http://sh.lianjia.com/zufang/sard32ef','http://sh.lianjia.com/zufang/','http://sh.lianjia.com/zufang/',
-   'http://sh.lianjia.com/zufang/32323','http://sh.lianjia.com/zufang/dd','http://sh.lianjia.com/zufang/',
-   'http://sh.lianjia.com/zufang/dsfs','http://sh.lianjia.com/zufang/fdgfg','http://sh.lianjia.com/zufang/',
-   'http://sh.lianjia.com/zufang/shz123321.html','http://sh.lianjia.com/zufang','http://sh.lianjia.com/zufang',
-   'http://sh.lianjia.com/zufang/fds/d324','http://sh.lianjia.com/xiaoqu/rs%E4%B8%AD%E8%BF%9C%E4%B8%A4%E6%B9%BE%E5%9F%8E']
-#
-#
+# s=['http://sh.lianjia.com/zufang/sardef','http://sh.lianjia.com/zufang/','http://sh.lianjia.com/zufang/',
+#    'http://sh.lianjia.com/zufang/gubei/f10']
+# #
+# #
 # def filter_all_urls( value):
-#     match_re = re.match("(.*sh.lianjia.com/zufang/([a-z]*|shz\d+|shzr\d+)(/|$|.html))", value)
+#     match_re = re.match("(.*sh.lianjia.com/zufang/([a-z]*|shz\d+|shzr\d+)($|.html))", value)
 #     if match_re:
 #         return True
 #     else:

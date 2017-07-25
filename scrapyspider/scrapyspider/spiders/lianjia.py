@@ -57,7 +57,7 @@ class LianjiaSpider(RedisSpider):
     #     self.browser.quit()
 
     def filter_all_urls(self, value):
-        match_re = re.match("(.*sh.lianjia.com/zufang/([a-z]*|shz\d+|shzr\d+)(/|$|.html))", value)
+        match_re = re.match("(.*sh.lianjia.com/zufang/([a-z]*|shz\d+|shzr\d+)($|.html))", value)
         if match_re:
             return True
         else:
@@ -77,9 +77,10 @@ class LianjiaSpider(RedisSpider):
             else:
                 yield scrapy.Request(url, headers=self.headers, callback=self.parse)
 
+
     def parse_lianjia(self, response):
         lianjia_id = 0
-        match_re = re.match("(.*sh.lianjia.com/zufang/shz(\d+)).*", response.url)
+        match_re = re.match("(.*sh.lianjia.com/zufang/(shz|shzr)(\d+)).*", response.url)
         if match_re:
             lianjia_id = int(match_re.group(2))
         item_loader = ItemLoader(item=LianJiaItem(), response=response)

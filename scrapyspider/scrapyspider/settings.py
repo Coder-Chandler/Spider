@@ -118,4 +118,4 @@ MYSQL_PASSWORD = "root"
 SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 # Ensure all spiders share same duplicates filter through redis.
 DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
-REDIS_URL = 'redis://root:myredis@127.0.0.1:6379'
+
