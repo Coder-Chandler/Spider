@@ -82,7 +82,7 @@ class LianjiaSpider(RedisSpider):
         lianjia_id = 0
         match_re = re.match("(.*sh.lianjia.com/zufang/(shz|shzr)(\d+)).*", response.url)
         if match_re:
-            lianjia_id = int(match_re.group(2))
+            lianjia_id = int(match_re.group(3))
         item_loader = ItemLoader(item=LianJiaItem(), response=response)
         item_loader.add_value("url", response.url)
         item_loader.add_value("lianjia_id", lianjia_id)
