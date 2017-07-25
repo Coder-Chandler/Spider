@@ -89,10 +89,11 @@ class LianjiaSpider(RedisSpider):
         if 'shzr' in response.url:
             item_loader.add_css("residential_district_name",
                                 "table.aroundInfo tr:nth-child(4) td:nth-child(2) p a::text")
-        else:
+            item_loader.add_css("region", "table.aroundInfo tr:nth-child(3) td:nth-child(2) a::text")
+        if 'shz' in response.url:
             item_loader.add_css("residential_district_name",
                                 "table.aroundInfo tr:nth-child(3) td:nth-child(2) p a::text")
-        item_loader.add_css("region", "table.aroundInfo tr:nth-child(2) td:nth-child(2) a::text")
+            item_loader.add_css("region", "table.aroundInfo tr:nth-child(2) td:nth-child(2) a::text")
         item_loader.add_css("address", "table.aroundInfo tr:nth-child(4) td:nth-child(2) p::attr(title)")
         item_loader.add_css("house_area", ".houseInfo .area .mainInfo::text")
         item_loader.add_css("room_count", ".houseInfo .room .mainInfo::text")

@@ -38,8 +38,8 @@
       <file leaf-file-name="lianjia.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scrapyspider/spiders/lianjia.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="411">
-              <caret line="75" column="0" lean-forward="true" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+            <state relative-caret-position="158">
+              <caret line="91" column="74" lean-forward="false" selection-start-line="91" selection-start-column="74" selection-end-line="91" selection-end-column="74" />
               <folding>
                 <element signature="e#24#37#0" expanded="true" />
               </folding>
@@ -82,8 +82,8 @@
       <file leaf-file-name="items.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scrapyspider/items.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8073">
-              <caret line="358" column="33" lean-forward="false" selection-start-line="358" selection-start-column="33" selection-end-line="358" selection-end-column="33" />
+            <state relative-caret-position="291">
+              <caret line="304" column="41" lean-forward="true" selection-start-line="304" selection-start-column="8" selection-end-line="304" selection-end-column="41" />
               <folding>
                 <element signature="e#152#165#0" expanded="true" />
                 <marker date="1500910998557" expanded="true" signature="1615:2216" ph="insert into jobbole" />
@@ -169,8 +169,8 @@
         <option value="$PROJECT_DIR$/scrapyspider/items.py" />
         <option value="$PROJECT_DIR$/scrapyspider/middlewares.py" />
         <option value="$PROJECT_DIR$/scrapyspider/settings.py" />
-        <option value="$PROJECT_DIR$/scrapyspider/spiders/lianjia.py" />
         <option value="$PROJECT_DIR$/scrapyspider/utils/common_use_func.py" />
+        <option value="$PROJECT_DIR$/scrapyspider/spiders/lianjia.py" />
       </list>
     </option>
   </component>
@@ -1155,7 +1155,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.common_use_func">
+  <component name="RunManager" selected="Python.main">
     <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -1800,26 +1800,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scrapyspider/items.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8073">
-          <caret line="358" column="33" lean-forward="false" selection-start-line="358" selection-start-column="33" selection-end-line="358" selection-end-column="33" />
-          <folding>
-            <element signature="e#152#165#0" expanded="true" />
-            <marker date="1500910998557" expanded="true" signature="1615:2216" ph="insert into jobbole" />
-            <marker date="1500910998557" expanded="true" signature="3535:4659" ph="insert into zhihu_question... " />
-            <marker date="1500910998557" expanded="true" signature="6507:7362" ph="insert into zhihu_answer... " />
-            <marker date="1500910998557" expanded="true" signature="9614:10103" ph="insert into lagou_job... " />
-            <marker date="1500910998557" expanded="true" signature="10104:10754" ph="UPDATE url=V... " />
-            <marker date="1500910998557" expanded="true" signature="12594:13064" ph="insert into lagou_job... " />
-            <marker date="1500910998557" expanded="true" signature="12594:13400" ph="insert into lianjia... " />
-            <marker date="1500910998557" expanded="true" signature="13065:13400" ph="UPDATE url=V... " />
-            <marker date="1500910998557" expanded="true" signature="14978:15331" ph="insert into lianjia... " />
-            <marker date="1500910998557" expanded="true" signature="15332:15621" ph="UPDATE resid... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.virtualenvs/spider_project_py3/lib/python3.4/site-packages/selenium/webdriver/remote/webdriver.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -1881,10 +1861,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scrapyspider/items.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="304" column="41" lean-forward="true" selection-start-line="304" selection-start-column="8" selection-end-line="304" selection-end-column="41" />
+          <folding>
+            <element signature="e#152#165#0" expanded="true" />
+            <marker date="1500910998557" expanded="true" signature="1615:2216" ph="insert into jobbole" />
+            <marker date="1500910998557" expanded="true" signature="3535:4659" ph="insert into zhihu_question... " />
+            <marker date="1500910998557" expanded="true" signature="6507:7362" ph="insert into zhihu_answer... " />
+            <marker date="1500910998557" expanded="true" signature="9614:10103" ph="insert into lagou_job... " />
+            <marker date="1500910998557" expanded="true" signature="10104:10754" ph="UPDATE url=V... " />
+            <marker date="1500910998557" expanded="true" signature="12594:13064" ph="insert into lagou_job... " />
+            <marker date="1500910998557" expanded="true" signature="12594:13400" ph="insert into lianjia... " />
+            <marker date="1500910998557" expanded="true" signature="13065:13400" ph="UPDATE url=V... " />
+            <marker date="1500910998557" expanded="true" signature="14978:15331" ph="insert into lianjia... " />
+            <marker date="1500910998557" expanded="true" signature="15332:15621" ph="UPDATE resid... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scrapyspider/spiders/lianjia.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="75" column="0" lean-forward="true" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+        <state relative-caret-position="158">
+          <caret line="91" column="74" lean-forward="false" selection-start-line="91" selection-start-column="74" selection-end-line="91" selection-end-column="74" />
           <folding>
             <element signature="e#24#37#0" expanded="true" />
           </folding>
