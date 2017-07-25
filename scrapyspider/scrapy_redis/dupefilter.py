@@ -1,5 +1,6 @@
 import logging
 import time
+from utils.bloomfilter import conn, PyBloomFilter
 
 from scrapy.dupefilters import BaseDupeFilter
 from scrapy.utils.request import request_fingerprint
@@ -38,6 +39,8 @@ class RFPDupeFilter(BaseDupeFilter):
         self.key = key
         self.debug = debug
         self.logdupes = True
+        # 实例化bf，放在全局变量中，提高效率
+        self.bf = PyBloomFilter(conn=conn, key=key)
 
     @classmethod
     def from_settings(cls, settings):
@@ -95,10 +98,16 @@ class RFPDupeFilter(BaseDupeFilter):
         bool
 
         """
+        # 通过实例化后的bf判断fp是否存在与redis中，如果存在返回True否则返回False并且添加至redis
         fp = self.request_fingerprint(request)
+        if self.bf.is_exist(fp):
+            return True
+        else:
+            self.bf.add(fp)
+            return False
         # This returns the number of values added, zero if already exists.
-        added = self.server.sadd(self.key, fp)
-        return added == 0
+        # added = self.server.sadd(self.key, fp)
+        # return added == 0
 
     def request_fingerprint(self, request):
         """Returns a fingerprint for a given request.
