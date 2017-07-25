@@ -2,6 +2,7 @@ import hashlib
 import re
 import datetime
 import time
+import random
 from urllib import parse
 
 
@@ -173,6 +174,11 @@ def get_latitude(value):
     else:
         nums = 0
     return nums
+
+
+# def random_download_delay():
+#     return random.randint(0,5)
+# print(random_download_delay())
 # print(get_latitude('121.12343124, 31.1231231232, gfdg'))
 
 # s='http://sh.lianjia.com/zufang/guangxin'
