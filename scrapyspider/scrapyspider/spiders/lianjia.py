@@ -73,10 +73,8 @@ class LianjiaSpider(RedisSpider):
             if match_re:
                 request_url = match_re.group(1)
                 yield scrapy.Request(request_url, headers=self.headers, callback=self.parse_lianjia)
-                break
             else:
-                # yield scrapy.Request(url, headers=self.headers, callback=self.parse)
-                pass
+                yield scrapy.Request(url, headers=self.headers, callback=self.parse)
 
     def parse_lianjia(self, response):
         lianjia_id = 0

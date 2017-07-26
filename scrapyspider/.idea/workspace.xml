@@ -12,7 +12,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/scrapyspider$lagoujob.coverage" NAME="lagoujob Coverage Results" MODIFIED="1500266997700" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scrapyspider/spiders" />
     <SUITE FILE_PATH="coverage/scrapyspider$bloomfilter.coverage" NAME="bloomfilter Coverage Results" MODIFIED="1501039556896" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scrapyspider/utils" />
-    <SUITE FILE_PATH="coverage/scrapyspider$main.coverage" NAME="main Coverage Results" MODIFIED="1501084436442" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scrapyspider" />
+    <SUITE FILE_PATH="coverage/scrapyspider$main.coverage" NAME="main Coverage Results" MODIFIED="1501085048568" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scrapyspider" />
     <SUITE FILE_PATH="coverage/scrapyspider$jobbole.coverage" NAME="jobbole Coverage Results" MODIFIED="1499780360113" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scrapyspider/spiders" />
     <SUITE FILE_PATH="coverage/scrapyspider$html.coverage" NAME="html Coverage Results" MODIFIED="1500219467317" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/.virtualenvs/spider_project_py3/lib/python3.4/site-packages/w3lib" />
     <SUITE FILE_PATH="coverage/scrapyspider$selenium.coverage" NAME="selenium Coverage Results" MODIFIED="1500640568524" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scrapyspider/tools" />
@@ -52,18 +52,18 @@
       <file leaf-file-name="items.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scrapyspider/items.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="321" column="0" lean-forward="true" selection-start-line="321" selection-start-column="0" selection-end-line="321" selection-end-column="0" />
+            <state relative-caret-position="475">
+              <caret line="327" column="0" lean-forward="false" selection-start-line="327" selection-start-column="0" selection-end-line="327" selection-end-column="0" />
               <folding>
-                <marker date="1501083504515" expanded="true" signature="1615:2216" ph="insert into jobbole" />
-                <marker date="1501083504515" expanded="true" signature="3535:4659" ph="insert into zhihu_question... " />
-                <marker date="1501083504515" expanded="true" signature="6507:7362" ph="insert into zhihu_answer... " />
-                <marker date="1501083504515" expanded="true" signature="9614:10103" ph="insert into lagou_job... " />
-                <marker date="1501083504515" expanded="true" signature="10104:10754" ph="UPDATE url=V... " />
-                <marker date="1501083504515" expanded="true" signature="12644:13114" ph="insert into lianjia... " />
-                <marker date="1501083504515" expanded="true" signature="13115:13450" ph="UPDATE url=V... " />
-                <marker date="1501083504515" expanded="true" signature="15214:15567" ph="insert into LianJia_latitude_longitude... " />
-                <marker date="1501083504515" expanded="true" signature="15568:15857" ph="UPDATE resid... " />
+                <marker date="1501084966971" expanded="true" signature="1615:2216" ph="insert into jobbole" />
+                <marker date="1501084966971" expanded="true" signature="3535:4659" ph="insert into zhihu_question... " />
+                <marker date="1501084966971" expanded="true" signature="6507:7362" ph="insert into zhihu_answer... " />
+                <marker date="1501084966971" expanded="true" signature="9614:10103" ph="insert into lagou_job... " />
+                <marker date="1501084966971" expanded="true" signature="10104:10754" ph="UPDATE url=V... " />
+                <marker date="1501084966971" expanded="true" signature="12644:13114" ph="insert into lianjia... " />
+                <marker date="1501084966971" expanded="true" signature="13115:13450" ph="UPDATE url=V... " />
+                <marker date="1501084966971" expanded="true" signature="15203:15556" ph="insert into LianJia_latitude_longitude... " />
+                <marker date="1501084966971" expanded="true" signature="15557:15846" ph="UPDATE resid... " />
               </folding>
             </state>
           </provider>
@@ -82,8 +82,8 @@
       <file leaf-file-name="lianjia.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scrapyspider/spiders/lianjia.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="120" column="0" lean-forward="false" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
+            <state relative-caret-position="1081">
+              <caret line="113" column="70" lean-forward="false" selection-start-line="113" selection-start-column="70" selection-end-line="113" selection-end-column="70" />
               <folding>
                 <element signature="e#24#37#0" expanded="true" />
               </folding>
@@ -173,9 +173,9 @@
         <option value="$PROJECT_DIR$/scrapyspider/utils/bloomfilter.py" />
         <option value="$PROJECT_DIR$/scrapyspider/settings.py" />
         <option value="$PROJECT_DIR$/scrapyspider/utils/common_use_func.py" />
-        <option value="$PROJECT_DIR$/scrapyspider/items.py" />
         <option value="$PROJECT_DIR$/scrapyspider/pipelines.py" />
         <option value="$PROJECT_DIR$/scrapyspider/spiders/lianjia.py" />
+        <option value="$PROJECT_DIR$/scrapyspider/items.py" />
       </list>
     </option>
   </component>
@@ -616,12 +616,12 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.711838" sideWeight="0.506079" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.60747665" sideWeight="0.49392098" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.60747665" sideWeight="0.49392098" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40809968" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3271028" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24299066" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -666,14 +666,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/scrapyspider/spiders/lianjia.py</url>
-          <line>120</line>
-          <option name="timeStamp" value="297" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/scrapyspider/items.py</url>
-          <line>318</line>
-          <option name="timeStamp" value="298" />
+          <line>327</line>
+          <option name="timeStamp" value="299" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -686,7 +681,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="299" />
+      <option name="time" value="300" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1067,8 +1062,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scrapyspider/spiders/lianjia.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="120" column="0" lean-forward="false" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
+        <state relative-caret-position="1081">
+          <caret line="113" column="70" lean-forward="false" selection-start-line="113" selection-start-column="70" selection-end-line="113" selection-end-column="70" />
           <folding>
             <element signature="e#24#37#0" expanded="true" />
           </folding>
@@ -1077,18 +1072,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scrapyspider/items.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="321" column="0" lean-forward="true" selection-start-line="321" selection-start-column="0" selection-end-line="321" selection-end-column="0" />
+        <state relative-caret-position="475">
+          <caret line="327" column="0" lean-forward="false" selection-start-line="327" selection-start-column="0" selection-end-line="327" selection-end-column="0" />
           <folding>
-            <marker date="1501083504515" expanded="true" signature="1615:2216" ph="insert into jobbole" />
-            <marker date="1501083504515" expanded="true" signature="3535:4659" ph="insert into zhihu_question... " />
-            <marker date="1501083504515" expanded="true" signature="6507:7362" ph="insert into zhihu_answer... " />
-            <marker date="1501083504515" expanded="true" signature="9614:10103" ph="insert into lagou_job... " />
-            <marker date="1501083504515" expanded="true" signature="10104:10754" ph="UPDATE url=V... " />
-            <marker date="1501083504515" expanded="true" signature="12644:13114" ph="insert into lianjia... " />
-            <marker date="1501083504515" expanded="true" signature="13115:13450" ph="UPDATE url=V... " />
-            <marker date="1501083504515" expanded="true" signature="15214:15567" ph="insert into LianJia_latitude_longitude... " />
-            <marker date="1501083504515" expanded="true" signature="15568:15857" ph="UPDATE resid... " />
+            <marker date="1501084966971" expanded="true" signature="1615:2216" ph="insert into jobbole" />
+            <marker date="1501084966971" expanded="true" signature="3535:4659" ph="insert into zhihu_question... " />
+            <marker date="1501084966971" expanded="true" signature="6507:7362" ph="insert into zhihu_answer... " />
+            <marker date="1501084966971" expanded="true" signature="9614:10103" ph="insert into lagou_job... " />
+            <marker date="1501084966971" expanded="true" signature="10104:10754" ph="UPDATE url=V... " />
+            <marker date="1501084966971" expanded="true" signature="12644:13114" ph="insert into lianjia... " />
+            <marker date="1501084966971" expanded="true" signature="13115:13450" ph="UPDATE url=V... " />
+            <marker date="1501084966971" expanded="true" signature="15203:15556" ph="insert into LianJia_latitude_longitude... " />
+            <marker date="1501084966971" expanded="true" signature="15557:15846" ph="UPDATE resid... " />
           </folding>
         </state>
       </provider>

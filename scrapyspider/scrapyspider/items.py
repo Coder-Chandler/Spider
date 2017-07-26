@@ -316,7 +316,7 @@ class LianJiaItem(scrapy.Item):
         rent_price = int("".join(self["rent_price"]))
         floor = self["floor"][0]
         publish_time = self["publish_time"][0]
-        total_watch_count = int("".join(self["total_watch_count"]))
+        total_watch_count = self["total_watch_count"][0]
         crwal_time = datetime.datetime.now()
         crwal_update_time = datetime.datetime.now()
 
