@@ -281,7 +281,9 @@ class LianJiaItem(scrapy.Item):
     rent_price = scrapy.Field()
     floor = scrapy.Field()
     publish_time = scrapy.Field()
-    total_watch_count = scrapy.Field()
+    total_watch_count = scrapy.Field(
+        input_processor=MapCompose(get_nums)
+    )
     crwal_time = scrapy.Field()
     crwal_update_time = scrapy.Field()
 
@@ -300,11 +302,15 @@ class LianJiaItem(scrapy.Item):
         """
         url = self["url"][0]
         lianjia_id = self["lianjia_id"][0]
-        residential_district_name = self["residential_district_name"][0]
+        residential_district_name = ""
+        if 'shzr' in url:
+            residential_district_name = self["residential_district_name"][0]+'(自如租房)'
+        if 'shz' in url:
+            residential_district_name = self["residential_district_name"][0]
         residential_district_url = self["residential_district_url"]
         region = ",".join(self["region"])
         address = self["address"][0]
-        house_area = int("".join(self["house_area"]))
+        house_area = float("".join(self["house_area"]))*1.0
         room_count = ",".join(self["room_count"])
         face_direction = "".join(self["face_direction"]).strip()
         rent_price = int("".join(self["rent_price"]))

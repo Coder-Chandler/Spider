@@ -38,6 +38,7 @@ def get_nums(value):
     else:
         nums = 0
     return nums
+# print (get_nums('asdddsad 13dfewf efe'))
 
 
 def remove_comment_tags(value):

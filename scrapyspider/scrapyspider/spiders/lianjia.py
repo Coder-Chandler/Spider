@@ -73,7 +73,6 @@ class LianjiaSpider(RedisSpider):
             if match_re:
                 request_url = match_re.group(1)
                 yield scrapy.Request(request_url, headers=self.headers, callback=self.parse_lianjia)
-
             else:
                 yield scrapy.Request(url, headers=self.headers, callback=self.parse)
 
@@ -88,25 +87,38 @@ class LianjiaSpider(RedisSpider):
         if 'shzr' in response.url:
             item_loader.add_css("residential_district_name",
                                 "table.aroundInfo tr:nth-child(4) td:nth-child(2) p a::text")
-            item_loader.add_css("region", "table.aroundInfo tr:nth-child(3) td:nth-child(2) a::text")
+            item_loader.add_css("residential_district_url",
+                                "table.aroundInfo tr:nth-child(4) td:nth-child(2) p a::attr(href)")
+            item_loader.add_css("region", "table.aroundInfo tr:nth-child(2) td:nth-child(2) a::text")
+            item_loader.add_css("room_count", ".aroundInfo tr:nth-child(1) td:nth-child(2)::text")
+            item_loader.add_css("address", "table.aroundInfo tr:nth-child(5) td:nth-child(2) p::attr(title)")
+            item_loader.add_css("house_area", ".houseInfo ziru_hezu .area .mainInfo::text")
+            item_loader.add_css("face_direction", "table.aroundInfo tr:nth-child(2) td:nth-child(4)::text")
+            item_loader.add_css("floor", "table.aroundInfo tr:nth-child(2) td:nth-child(2)::text")
+            item_loader.add_css("publish_time", "table.aroundInfo tr:nth-child(4) td:nth-child(4)::text")
+            item_loader.add_css("total_watch_count", ".evaluate.rate::text")
         if 'shz' in response.url:
             item_loader.add_css("residential_district_name",
                                 "table.aroundInfo tr:nth-child(3) td:nth-child(2) p a::text")
+            item_loader.add_css("residential_district_url",
+                                "table.aroundInfo tr:nth-child(3) td:nth-child(2) p a::attr(href)")
             item_loader.add_css("region", "table.aroundInfo tr:nth-child(2) td:nth-child(2) a::text")
-        item_loader.add_css("address", "table.aroundInfo tr:nth-child(4) td:nth-child(2) p::attr(title)")
-        item_loader.add_css("house_area", ".houseInfo .area .mainInfo::text")
-        item_loader.add_css("room_count", ".houseInfo .room .mainInfo::text")
-        item_loader.add_css("face_direction", "table.aroundInfo tr:nth-child(1) td:nth-child(4)::text")
+            item_loader.add_css("room_count", ".houseInfo .room .mainInfo::text")
+            item_loader.add_css("address", "table.aroundInfo tr:nth-child(4) td:nth-child(2) p::attr(title)")
+            item_loader.add_css("house_area", ".houseInfo .area .mainInfo::text")
+            item_loader.add_css("face_direction", "table.aroundInfo tr:nth-child(1) td:nth-child(4)::text")
+            item_loader.add_css("floor", "table.aroundInfo tr td:nth-child(2)::text")
+            item_loader.add_css("publish_time", "table.aroundInfo tr:nth-child(2) td:nth-child(4)::text")
+            item_loader.add_css("total_watch_count", ".totalCount span::text")
         item_loader.add_xpath("rent_price", "//div[@class='mainInfo bold']/text()")
-        item_loader.add_css("floor", "table.aroundInfo tr td:nth-child(2)::text")
-        item_loader.add_css("publish_time", "table.aroundInfo tr:nth-child(2) td:nth-child(4)::text")
-        item_loader.add_css("total_watch_count", ".totalCount span::text")
+
 
         lianjia = item_loader.load_item()
-        residential_district_url = response.css("table.aroundInfo tr:nth-child(3) td:nth-child(2) p a::attr(href)").extract_first("")
+        residential_district_name = lianjia.get("residential_district_name", "")
+        residential_district_url = lianjia.get("residential_district_url")
         residential_district_url = parse.urljoin(response.url, residential_district_url)
         lianjia["residential_district_url"] = residential_district_url
-        residential_district_name = lianjia.get("residential_district_name", "")
+
         yield scrapy.Request(residential_district_url, headers=self.headers,
                              meta={
                                  "residential_district_name": residential_district_name,
