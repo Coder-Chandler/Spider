@@ -12,7 +12,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/scrapyspider$lagoujob.coverage" NAME="lagoujob Coverage Results" MODIFIED="1500266997700" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scrapyspider/spiders" />
     <SUITE FILE_PATH="coverage/scrapyspider$bloomfilter.coverage" NAME="bloomfilter Coverage Results" MODIFIED="1501039556896" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scrapyspider/utils" />
-    <SUITE FILE_PATH="coverage/scrapyspider$main.coverage" NAME="main Coverage Results" MODIFIED="1501080703212" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scrapyspider" />
+    <SUITE FILE_PATH="coverage/scrapyspider$main.coverage" NAME="main Coverage Results" MODIFIED="1501084436442" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scrapyspider" />
     <SUITE FILE_PATH="coverage/scrapyspider$jobbole.coverage" NAME="jobbole Coverage Results" MODIFIED="1499780360113" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scrapyspider/spiders" />
     <SUITE FILE_PATH="coverage/scrapyspider$html.coverage" NAME="html Coverage Results" MODIFIED="1500219467317" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/.virtualenvs/spider_project_py3/lib/python3.4/site-packages/w3lib" />
     <SUITE FILE_PATH="coverage/scrapyspider$selenium.coverage" NAME="selenium Coverage Results" MODIFIED="1500640568524" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/scrapyspider/tools" />
@@ -49,31 +49,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="items.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="items.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scrapyspider/items.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="274" column="44" lean-forward="false" selection-start-line="274" selection-start-column="44" selection-end-line="274" selection-end-column="44" />
+            <state relative-caret-position="199">
+              <caret line="321" column="0" lean-forward="true" selection-start-line="321" selection-start-column="0" selection-end-line="321" selection-end-column="0" />
               <folding>
-                <marker date="1501082972339" expanded="true" signature="1615:2216" ph="insert into jobbole" />
-                <marker date="1501082972339" expanded="true" signature="3535:4659" ph="insert into zhihu_question... " />
-                <marker date="1501082972339" expanded="true" signature="6507:7362" ph="insert into zhihu_answer... " />
-                <marker date="1501082972339" expanded="true" signature="9614:10103" ph="insert into lagou_job... " />
-                <marker date="1501082972339" expanded="true" signature="10104:10754" ph="UPDATE url=V... " />
-                <marker date="1501082972339" expanded="true" signature="12694:13164" ph="insert into lianjia... " />
-                <marker date="1501082972339" expanded="true" signature="13165:13500" ph="UPDATE url=V... " />
-                <marker date="1501082972339" expanded="true" signature="15084:15437" ph="insert into LianJia_latitude_longitude... " />
-                <marker date="1501082972339" expanded="true" signature="15438:15727" ph="UPDATE resid... " />
+                <marker date="1501083504515" expanded="true" signature="1615:2216" ph="insert into jobbole" />
+                <marker date="1501083504515" expanded="true" signature="3535:4659" ph="insert into zhihu_question... " />
+                <marker date="1501083504515" expanded="true" signature="6507:7362" ph="insert into zhihu_answer... " />
+                <marker date="1501083504515" expanded="true" signature="9614:10103" ph="insert into lagou_job... " />
+                <marker date="1501083504515" expanded="true" signature="10104:10754" ph="UPDATE url=V... " />
+                <marker date="1501083504515" expanded="true" signature="12644:13114" ph="insert into lianjia... " />
+                <marker date="1501083504515" expanded="true" signature="13115:13450" ph="UPDATE url=V... " />
+                <marker date="1501083504515" expanded="true" signature="15214:15567" ph="insert into LianJia_latitude_longitude... " />
+                <marker date="1501083504515" expanded="true" signature="15568:15857" ph="UPDATE resid... " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="common_use_func.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="common_use_func.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scrapyspider/utils/common_use_func.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="180" column="7" lean-forward="false" selection-start-line="180" selection-start-column="7" selection-end-line="180" selection-end-column="7" />
+            <state relative-caret-position="328">
+              <caret line="178" column="0" lean-forward="false" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -82,8 +82,8 @@
       <file leaf-file-name="lianjia.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scrapyspider/spiders/lianjia.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="659">
-              <caret line="122" column="35" lean-forward="true" selection-start-line="122" selection-start-column="35" selection-end-line="122" selection-end-column="35" />
+            <state relative-caret-position="207">
+              <caret line="120" column="0" lean-forward="false" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
               <folding>
                 <element signature="e#24#37#0" expanded="true" />
               </folding>
@@ -96,6 +96,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="138">
               <caret line="8" column="39" lean-forward="true" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pipelines.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scrapyspider/pipelines.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="305">
+              <caret line="88" column="38" lean-forward="true" selection-start-line="88" selection-start-column="38" selection-end-line="88" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -147,7 +157,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/scrapyspider/pipelines.py" />
         <option value="$PROJECT_DIR$/scrapyspider/spiders/jobbole.py" />
         <option value="$USER_HOME$/.virtualenvs/spider_project_py3/lib/python3.4/site-packages/w3lib/html.py" />
         <option value="$PROJECT_DIR$/scrapyspider/tools/xici_ip.py" />
@@ -163,9 +172,10 @@
         <option value="$PROJECT_DIR$/scrapyspider/tools/redistest.py" />
         <option value="$PROJECT_DIR$/scrapyspider/utils/bloomfilter.py" />
         <option value="$PROJECT_DIR$/scrapyspider/settings.py" />
-        <option value="$PROJECT_DIR$/scrapyspider/spiders/lianjia.py" />
-        <option value="$PROJECT_DIR$/scrapyspider/items.py" />
         <option value="$PROJECT_DIR$/scrapyspider/utils/common_use_func.py" />
+        <option value="$PROJECT_DIR$/scrapyspider/items.py" />
+        <option value="$PROJECT_DIR$/scrapyspider/pipelines.py" />
+        <option value="$PROJECT_DIR$/scrapyspider/spiders/lianjia.py" />
       </list>
     </option>
   </component>
@@ -312,7 +322,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.common_use_func">
+  <component name="RunManager" selected="Python.main">
     <configuration default="false" name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -565,8 +575,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.common_use_func" />
-        <item index="1" class="java.lang.String" itemvalue="Python.main" />
+        <item index="0" class="java.lang.String" itemvalue="Python.main" />
+        <item index="1" class="java.lang.String" itemvalue="Python.common_use_func" />
         <item index="2" class="java.lang.String" itemvalue="Python.redistest" />
         <item index="3" class="java.lang.String" itemvalue="Python.bloomfilter" />
         <item index="4" class="java.lang.String" itemvalue="Python.selenium" />
@@ -611,7 +621,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40809968" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34735203" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3271028" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -657,8 +667,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/scrapyspider/spiders/lianjia.py</url>
-          <line>121</line>
-          <option name="timeStamp" value="292" />
+          <line>120</line>
+          <option name="timeStamp" value="297" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/scrapyspider/items.py</url>
+          <line>318</line>
+          <option name="timeStamp" value="298" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -671,7 +686,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="293" />
+      <option name="time" value="299" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -865,13 +880,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scrapyspider/pipelines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2024">
-          <caret line="94" column="0" lean-forward="false" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scrapyspider/middlewares.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2461">
@@ -917,16 +925,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scrapy_redis/pipelines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1104">
-          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#41#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scrapy_redis/queue.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1725">
@@ -954,14 +952,6 @@
           <folding>
             <element signature="e#0#43#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scrapyspider/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="8" column="39" lean-forward="true" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1043,10 +1033,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/scrapyspider/utils/common_use_func.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="178" column="0" lean-forward="false" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scrapy_redis/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="995">
+          <caret line="52" column="0" lean-forward="false" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scrapyspider/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="8" column="39" lean-forward="true" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scrapyspider/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="88" column="38" lean-forward="true" selection-start-line="88" selection-start-column="38" selection-end-line="88" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/scrapyspider/spiders/lianjia.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="659">
-          <caret line="122" column="35" lean-forward="true" selection-start-line="122" selection-start-column="35" selection-end-line="122" selection-end-column="35" />
+        <state relative-caret-position="207">
+          <caret line="120" column="0" lean-forward="false" selection-start-line="120" selection-start-column="0" selection-end-line="120" selection-end-column="0" />
           <folding>
             <element signature="e#24#37#0" expanded="true" />
           </folding>
@@ -1055,27 +1077,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scrapyspider/items.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="274" column="44" lean-forward="false" selection-start-line="274" selection-start-column="44" selection-end-line="274" selection-end-column="44" />
+        <state relative-caret-position="199">
+          <caret line="321" column="0" lean-forward="true" selection-start-line="321" selection-start-column="0" selection-end-line="321" selection-end-column="0" />
           <folding>
-            <marker date="1501082972339" expanded="true" signature="1615:2216" ph="insert into jobbole" />
-            <marker date="1501082972339" expanded="true" signature="3535:4659" ph="insert into zhihu_question... " />
-            <marker date="1501082972339" expanded="true" signature="6507:7362" ph="insert into zhihu_answer... " />
-            <marker date="1501082972339" expanded="true" signature="9614:10103" ph="insert into lagou_job... " />
-            <marker date="1501082972339" expanded="true" signature="10104:10754" ph="UPDATE url=V... " />
-            <marker date="1501082972339" expanded="true" signature="12694:13164" ph="insert into lianjia... " />
-            <marker date="1501082972339" expanded="true" signature="13165:13500" ph="UPDATE url=V... " />
-            <marker date="1501082972339" expanded="true" signature="15084:15437" ph="insert into LianJia_latitude_longitude... " />
-            <marker date="1501082972339" expanded="true" signature="15438:15727" ph="UPDATE resid... " />
+            <marker date="1501083504515" expanded="true" signature="1615:2216" ph="insert into jobbole" />
+            <marker date="1501083504515" expanded="true" signature="3535:4659" ph="insert into zhihu_question... " />
+            <marker date="1501083504515" expanded="true" signature="6507:7362" ph="insert into zhihu_answer... " />
+            <marker date="1501083504515" expanded="true" signature="9614:10103" ph="insert into lagou_job... " />
+            <marker date="1501083504515" expanded="true" signature="10104:10754" ph="UPDATE url=V... " />
+            <marker date="1501083504515" expanded="true" signature="12644:13114" ph="insert into lianjia... " />
+            <marker date="1501083504515" expanded="true" signature="13115:13450" ph="UPDATE url=V... " />
+            <marker date="1501083504515" expanded="true" signature="15214:15567" ph="insert into LianJia_latitude_longitude... " />
+            <marker date="1501083504515" expanded="true" signature="15568:15857" ph="UPDATE resid... " />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scrapyspider/utils/common_use_func.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="180" column="7" lean-forward="false" selection-start-line="180" selection-start-column="7" selection-end-line="180" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>

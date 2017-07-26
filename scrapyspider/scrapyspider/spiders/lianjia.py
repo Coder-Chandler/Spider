@@ -73,8 +73,10 @@ class LianjiaSpider(RedisSpider):
             if match_re:
                 request_url = match_re.group(1)
                 yield scrapy.Request(request_url, headers=self.headers, callback=self.parse_lianjia)
+                break
             else:
-                yield scrapy.Request(url, headers=self.headers, callback=self.parse)
+                # yield scrapy.Request(url, headers=self.headers, callback=self.parse)
+                pass
 
     def parse_lianjia(self, response):
         lianjia_id = 0
@@ -112,10 +114,9 @@ class LianjiaSpider(RedisSpider):
             item_loader.add_css("total_watch_count", ".totalCount span::text")
         item_loader.add_xpath("rent_price", "//div[@class='mainInfo bold']/text()")
 
-
         lianjia = item_loader.load_item()
         residential_district_name = lianjia.get("residential_district_name", "")
-        residential_district_url = lianjia.get("residential_district_url")
+        residential_district_url = lianjia.get("residential_district_url")[0]
         residential_district_url = parse.urljoin(response.url, residential_district_url)
         lianjia["residential_district_url"] = residential_district_url
 
