@@ -77,7 +77,6 @@ class LianjiaSpider(RedisSpider):
             else:
                 yield scrapy.Request(url, headers=self.headers, callback=self.parse)
 
-
     def parse_lianjia(self, response):
         lianjia_id = 0
         match_re = re.match("(.*sh.lianjia.com/zufang/(shz|shzr)(\d+)).*", response.url)

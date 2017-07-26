@@ -1,6 +1,6 @@
 import logging
 import time
-from utils.bloomfilter import conn, PyBloomFilter
+from scrapyspider.utils.bloomfilter import conn, PyBloomFilter
 
 from scrapy.dupefilters import BaseDupeFilter
 from scrapy.utils.request import request_fingerprint

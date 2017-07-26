@@ -16,7 +16,7 @@ class PyBloomFilter():
     #error_rate表示错误率
     #conn表示redis的连接客户端
     #key表示在redis中的键的名字前缀
-    def __init__(self, capacity=1000000000, error_rate=0.00000001, conn=None, key='BloomFilter'):
+    def __init__(self, capacity=100000, error_rate=0.00000001, conn=None, key='BloomFilter'):
         self.m = math.ceil(capacity*math.log2(math.e)*math.log2(1/error_rate))      #需要的总bit位数
         self.k = math.ceil(math.log1p(2)*self.m/capacity)                           #需要最少的hash次数
         self.mem = math.ceil(self.m/8/1024/1024)                                    #需要的多少M内存
