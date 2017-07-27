@@ -66,19 +66,23 @@ class LianjiaSpider(RedisSpider):
     def parse(self, response):
         all_urls = response.xpath("//a/@href").extract()
         all_urls = [parse.urljoin(response.url, url) for url in all_urls]
-        all_urls = filter(self.filter_all_urls, all_urls)
+        all_urls = filter(lambda x: True if x.startswith("http://sh.lianjia.com/zufang/") else False, all_urls)
         for url in all_urls:
-            match_re = re.match("(.*sh.lianjia.com/zufang/((shz|shzr)\d*)(.html$))", url)
+            match_re = re.match("(.*sh.lianjia.com/zufang/((shz)\d*)(.html$))", url)
             # match_re = re.match("(.*sh.lianjia.com/zufang/(\w[a-z]*$))", url)
             if match_re:
                 request_url = match_re.group(1)
                 yield scrapy.Request(request_url, headers=self.headers, callback=self.parse_lianjia)
-            else:
-                yield scrapy.Request(url, headers=self.headers, callback=self.parse)
+            # else:
+            #     yield scrapy.Request(url, headers=self.headers, callback=self.parse)
+        # 提取下一页，交给scrapy下载
+        next_url = response.xpath("//a[@gahref='results_next_page']/@href").extract_first("")
+        if next_url:
+            yield scrapy.Request(url=parse.urljoin(response.url, next_url), callback=self.parse)
 
     def parse_lianjia(self, response):
         lianjia_id = 0
-        match_re = re.match("(.*sh.lianjia.com/zufang/(shz|shzr)(\d+)).*", response.url)
+        match_re = re.match("(.*sh.lianjia.com/zufang/(shz)(\d+)).*", response.url)
         if match_re:
             lianjia_id = int(match_re.group(3))
         item_loader = ItemLoader(item=LianJiaItem(), response=response)
@@ -89,7 +93,7 @@ class LianjiaSpider(RedisSpider):
                                 "table.aroundInfo tr:nth-child(4) td:nth-child(2) p a::text")
             item_loader.add_css("residential_district_url",
                                 "table.aroundInfo tr:nth-child(4) td:nth-child(2) p a::attr(href)")
-            item_loader.add_css("region", "table.aroundInfo tr:nth-child(2) td:nth-child(2) a::text")
+            item_loader.add_css("region", "table.aroundInfo tr:nth-child(3) td:nth-child(2) a::text")
             item_loader.add_css("room_count", ".aroundInfo tr:nth-child(1) td:nth-child(2)::text")
             item_loader.add_css("address", "table.aroundInfo tr:nth-child(5) td:nth-child(2) p::attr(title)")
             item_loader.add_css("house_area", ".houseInfo ziru_hezu .area .mainInfo::text")
