@@ -22,7 +22,7 @@ class LianjiaSpider(RedisSpider):
     headers = {
         "Host": "sh.lianjia.com",
         "Connection": "keep-alive",
-        "Referer": "http://sh.lianjia.com/",
+        "Referer": "http://sh.lianjia.com/zufang/",
         'User-Agent': "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "Ubuntu Chromium/58.0.3029.110 Chrome/58.0.3029.110 Safari/537.36"
     }
@@ -57,7 +57,7 @@ class LianjiaSpider(RedisSpider):
     #     self.browser.quit()
 
     def filter_all_urls(self, value):
-        match_re = re.match("(.*sh.lianjia.com/zufang/([a-z]*|shz\d+|shzr\d+)($|.html))", value)
+        match_re = re.match("(.*sh.lianjia.com/zufang/(([a-z]{3,30}/d)|(shz\d+.html)|([a-z]{3,30}$)|d\d+))", value)
         if match_re:
             return True
         else:
@@ -66,19 +66,17 @@ class LianjiaSpider(RedisSpider):
     def parse(self, response):
         all_urls = response.xpath("//a/@href").extract()
         all_urls = [parse.urljoin(response.url, url) for url in all_urls]
-        all_urls = filter(lambda x: True if x.startswith("http://sh.lianjia.com/zufang/") else False, all_urls)
-        for url in all_urls:
-            match_re = re.match("(.*sh.lianjia.com/zufang/((shz)\d*)(.html$))", url)
-            # match_re = re.match("(.*sh.lianjia.com/zufang/(\w[a-z]*$))", url)
-            if match_re:
-                request_url = match_re.group(1)
-                yield scrapy.Request(request_url, headers=self.headers, callback=self.parse_lianjia)
-            # else:
-            #     yield scrapy.Request(url, headers=self.headers, callback=self.parse)
-        # 提取下一页，交给scrapy下载
+        all_urls = [url for url in all_urls if self.filter_all_urls(url)]
         next_url = response.xpath("//a[@gahref='results_next_page']/@href").extract_first("")
-        if next_url:
-            yield scrapy.Request(url=parse.urljoin(response.url, next_url), callback=self.parse)
+        next_url = parse.urljoin(response.url, next_url)  # 提取下一页，交给scrapy下载
+        for url in all_urls:
+            match_re_main = re.match("(.*sh.lianjia.com/zufang/((shz)\d*)(.html$))", url)
+            # match_re_region = re.match("(.*sh.lianjia.com/zufang/([a-z]{3,30}$))", url)
+            if match_re_main:
+                request_url = match_re_main.group(1)
+                yield scrapy.Request(request_url, headers=self.headers, callback=self.parse_lianjia)
+            else:
+                yield scrapy.Request(url, headers=self.headers, callback=self.parse)
 
     def parse_lianjia(self, response):
         lianjia_id = 0
@@ -88,32 +86,32 @@ class LianjiaSpider(RedisSpider):
         item_loader = ItemLoader(item=LianJiaItem(), response=response)
         item_loader.add_value("url", response.url)
         item_loader.add_value("lianjia_id", lianjia_id)
-        if 'shzr' in response.url:
-            item_loader.add_css("residential_district_name",
-                                "table.aroundInfo tr:nth-child(4) td:nth-child(2) p a::text")
-            item_loader.add_css("residential_district_url",
-                                "table.aroundInfo tr:nth-child(4) td:nth-child(2) p a::attr(href)")
-            item_loader.add_css("region", "table.aroundInfo tr:nth-child(3) td:nth-child(2) a::text")
-            item_loader.add_css("room_count", ".aroundInfo tr:nth-child(1) td:nth-child(2)::text")
-            item_loader.add_css("address", "table.aroundInfo tr:nth-child(5) td:nth-child(2) p::attr(title)")
-            item_loader.add_css("house_area", ".houseInfo ziru_hezu .area .mainInfo::text")
-            item_loader.add_css("face_direction", "table.aroundInfo tr:nth-child(2) td:nth-child(4)::text")
-            item_loader.add_css("floor", "table.aroundInfo tr:nth-child(2) td:nth-child(2)::text")
-            item_loader.add_css("publish_time", "table.aroundInfo tr:nth-child(4) td:nth-child(4)::text")
-            item_loader.add_css("total_watch_count", ".evaluate.rate::text")
-        if 'shz' in response.url:
-            item_loader.add_css("residential_district_name",
-                                "table.aroundInfo tr:nth-child(3) td:nth-child(2) p a::text")
-            item_loader.add_css("residential_district_url",
-                                "table.aroundInfo tr:nth-child(3) td:nth-child(2) p a::attr(href)")
-            item_loader.add_css("region", "table.aroundInfo tr:nth-child(2) td:nth-child(2) a::text")
-            item_loader.add_css("room_count", ".houseInfo .room .mainInfo::text")
-            item_loader.add_css("address", "table.aroundInfo tr:nth-child(4) td:nth-child(2) p::attr(title)")
-            item_loader.add_css("house_area", ".houseInfo .area .mainInfo::text")
-            item_loader.add_css("face_direction", "table.aroundInfo tr:nth-child(1) td:nth-child(4)::text")
-            item_loader.add_css("floor", "table.aroundInfo tr td:nth-child(2)::text")
-            item_loader.add_css("publish_time", "table.aroundInfo tr:nth-child(2) td:nth-child(4)::text")
-            item_loader.add_css("total_watch_count", ".totalCount span::text")
+        # if 'shzr' in response.url:
+        #     item_loader.add_css("residential_district_name",
+        #                         "table.aroundInfo tr:nth-child(4) td:nth-child(2) p a::text")
+        #     item_loader.add_css("residential_district_url",
+        #                         "table.aroundInfo tr:nth-child(4) td:nth-child(2) p a::attr(href)")
+        #     item_loader.add_css("region", "table.aroundInfo tr:nth-child(3) td:nth-child(2) a::text")
+        #     item_loader.add_css("room_count", ".aroundInfo tr:nth-child(1) td:nth-child(2)::text")
+        #     item_loader.add_css("address", "table.aroundInfo tr:nth-child(5) td:nth-child(2) p::attr(title)")
+        #     item_loader.add_css("house_area", ".houseInfo ziru_hezu .area .mainInfo::text")
+        #     item_loader.add_css("face_direction", "table.aroundInfo tr:nth-child(2) td:nth-child(4)::text")
+        #     item_loader.add_css("floor", "table.aroundInfo tr:nth-child(2) td:nth-child(2)::text")
+        #     item_loader.add_css("publish_time", "table.aroundInfo tr:nth-child(4) td:nth-child(4)::text")
+        #     item_loader.add_css("total_watch_count", ".evaluate.rate::text")
+        # if 'shz' in response.url:
+        item_loader.add_css("residential_district_name",
+                            "table.aroundInfo tr:nth-child(3) td:nth-child(2) p a::text")
+        item_loader.add_css("residential_district_url",
+                            "table.aroundInfo tr:nth-child(3) td:nth-child(2) p a::attr(href)")
+        item_loader.add_css("region", "table.aroundInfo tr:nth-child(2) td:nth-child(2) a::text")
+        item_loader.add_css("room_count", ".houseInfo .room .mainInfo::text")
+        item_loader.add_css("address", "table.aroundInfo tr:nth-child(4) td:nth-child(2) p::attr(title)")
+        item_loader.add_css("house_area", ".houseInfo .area .mainInfo::text")
+        item_loader.add_css("face_direction", "table.aroundInfo tr:nth-child(1) td:nth-child(4)::text")
+        item_loader.add_css("floor", "table.aroundInfo tr td:nth-child(2)::text")
+        item_loader.add_css("publish_time", "table.aroundInfo tr:nth-child(2) td:nth-child(4)::text")
+        item_loader.add_css("total_watch_count", ".totalCount span::text")
         item_loader.add_xpath("rent_price", "//div[@class='mainInfo bold']/text()")
 
         lianjia = item_loader.load_item()

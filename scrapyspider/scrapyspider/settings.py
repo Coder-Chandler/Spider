@@ -123,4 +123,7 @@ REDIS_HOST = 'localhost'
 
 REDIS_PORT = 6379
 
+# 注释设置为主机，打开设置为僚机
+# REDIS_URL = 'redis://192.168.1.103:6379'
+
 
