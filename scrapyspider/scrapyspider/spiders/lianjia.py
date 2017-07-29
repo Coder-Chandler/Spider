@@ -105,6 +105,7 @@ class LianjiaSpider(RedisSpider):
         item_loader.add_css("residential_district_url",
                             "table.aroundInfo tr:nth-child(3) td:nth-child(2) p a::attr(href)")
         item_loader.add_css("region", "table.aroundInfo tr:nth-child(2) td:nth-child(2) a::text")
+        item_loader.add_css("region_detail", "table.aroundInfo tr:nth-child(2) td:nth-child(2) a::text")
         item_loader.add_css("room_count", ".houseInfo .room .mainInfo::text")
         item_loader.add_css("address", "table.aroundInfo tr:nth-child(4) td:nth-child(2) p::attr(title)")
         item_loader.add_css("house_area", ".houseInfo .area .mainInfo::text")
