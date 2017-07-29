@@ -273,7 +273,7 @@ class LianJiaItem(scrapy.Item):
     lianjia_id = scrapy.Field()
     residential_district_name = scrapy.Field()
     residential_district_url = scrapy.Field()
-    desc = scrapy.Field()
+    title = scrapy.Field()
     region = scrapy.Field()
     region_detail = scrapy.Field()
     address = scrapy.Field()
@@ -292,7 +292,7 @@ class LianJiaItem(scrapy.Item):
     def get_insert_sql(self):
         insert_sql = """
             insert into lianjia(url, lianjia_id, residential_district_name, 
-                                residential_district_url, desc, region, region_detail,
+                                residential_district_url, title, region, region_detail,
                                 address, house_area, room_count, face_direction, 
                                 rent_price, floor, publish_time, total_watch_count, 
                                 crwal_time, crwal_update_time)
@@ -310,7 +310,7 @@ class LianJiaItem(scrapy.Item):
         if 'shz' in url:
             residential_district_name = self["residential_district_name"][0]
         residential_district_url = self["residential_district_url"]
-        desc = self["desc"][0]
+        title = self["title"][0]
         region = self["region"][0]
         region_detail = self["region"][1]
         address = self["address"][0]
@@ -325,7 +325,7 @@ class LianJiaItem(scrapy.Item):
         crwal_update_time = datetime.datetime.now()
 
         params = (url, lianjia_id, residential_district_name,
-                  residential_district_url, desc, region, region_detail, address, house_area,
+                  residential_district_url, title, region, region_detail, address, house_area,
                   room_count, face_direction, rent_price, floor, publish_time, total_watch_count,
                   crwal_time, crwal_update_time)
 

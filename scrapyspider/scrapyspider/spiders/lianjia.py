@@ -75,10 +75,8 @@ class LianjiaSpider(RedisSpider):
             if match_re_main:
                 request_url = match_re_main.group(1)
                 yield scrapy.Request(request_url, headers=self.headers, callback=self.parse_lianjia)
-                break
             else:
-                # yield scrapy.Request(url, headers=self.headers, callback=self.parse)
-                pass
+                yield scrapy.Request(url, headers=self.headers, callback=self.parse)
 
     def parse_lianjia(self, response):
         lianjia_id = 0
@@ -106,7 +104,7 @@ class LianjiaSpider(RedisSpider):
                             "table.aroundInfo tr:nth-child(3) td:nth-child(2) p a::text")
         item_loader.add_css("residential_district_url",
                             "table.aroundInfo tr:nth-child(3) td:nth-child(2) p a::attr(href)")
-        item_loader.add_css("desc", ".title-wrapper .title h1::text")
+        item_loader.add_css("title", ".title-wrapper .title h1::text")
         item_loader.add_css("region", "table.aroundInfo tr:nth-child(2) td:nth-child(2) a::text")
         item_loader.add_css("region_detail", "table.aroundInfo tr:nth-child(2) td:nth-child(2) a::text")
         item_loader.add_css("room_count", ".houseInfo .room .mainInfo::text")
