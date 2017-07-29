@@ -67,18 +67,18 @@
       <file leaf-file-name="items.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/scrapyspider/items.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="598">
-              <caret line="327" column="48" lean-forward="true" selection-start-line="327" selection-start-column="48" selection-end-line="327" selection-end-column="48" />
+            <state relative-caret-position="161">
+              <caret line="326" column="51" lean-forward="false" selection-start-line="326" selection-start-column="51" selection-end-line="326" selection-end-column="51" />
               <folding>
-                <marker date="1501291662791" expanded="true" signature="1615:2216" ph="insert into jobbole" />
-                <marker date="1501291662791" expanded="true" signature="3535:4659" ph="insert into zhihu_question... " />
-                <marker date="1501291662791" expanded="true" signature="6507:7362" ph="insert into zhihu_answer... " />
-                <marker date="1501291662791" expanded="true" signature="9614:10103" ph="insert into lagou_job... " />
-                <marker date="1501291662791" expanded="true" signature="10104:10754" ph="UPDATE url=V... " />
-                <marker date="1501291662791" expanded="true" signature="12679:13168" ph="insert into lianjia... " />
-                <marker date="1501291662791" expanded="true" signature="13169:13504" ph="UPDATE url=V... " />
-                <marker date="1501291662791" expanded="true" signature="15321:15674" ph="insert into LianJia_latitude_longitude... " />
-                <marker date="1501291662791" expanded="true" signature="15675:15964" ph="UPDATE resid... " />
+                <marker date="1501294455907" expanded="true" signature="1615:2216" ph="insert into jobbole" />
+                <marker date="1501294455907" expanded="true" signature="3535:4659" ph="insert into zhihu_question... " />
+                <marker date="1501294455907" expanded="true" signature="6507:7362" ph="insert into zhihu_answer... " />
+                <marker date="1501294455907" expanded="true" signature="9614:10103" ph="insert into lagou_job... " />
+                <marker date="1501294455907" expanded="true" signature="10104:10754" ph="UPDATE url=V... " />
+                <marker date="1501294455907" expanded="true" signature="12705:13204" ph="insert into lianjia... " />
+                <marker date="1501294455907" expanded="true" signature="13205:13540" ph="UPDATE url=V... " />
+                <marker date="1501294455907" expanded="true" signature="15364:15717" ph="insert into LianJia_latitude_longitude... " />
+                <marker date="1501294455907" expanded="true" signature="15718:16007" ph="UPDATE resid... " />
               </folding>
             </state>
           </provider>
@@ -97,8 +97,8 @@
       <file leaf-file-name="lianjia.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scrapyspider/spiders/lianjia.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="107" column="42" lean-forward="false" selection-start-line="107" selection-start-column="29" selection-end-line="107" selection-end-column="42" />
+            <state relative-caret-position="197">
+              <caret line="106" column="33" lean-forward="false" selection-start-line="106" selection-start-column="29" selection-end-line="106" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -646,7 +646,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7507788" sideWeight="0.49392098" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32178932" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32087228" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1793313" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32978722" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1076,26 +1076,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scrapyspider/spiders/lianjia.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="107" column="42" lean-forward="false" selection-start-line="107" selection-start-column="29" selection-end-line="107" selection-end-column="42" />
+        <state relative-caret-position="197">
+          <caret line="106" column="33" lean-forward="false" selection-start-line="106" selection-start-column="29" selection-end-line="106" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/scrapyspider/items.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="598">
-          <caret line="327" column="48" lean-forward="true" selection-start-line="327" selection-start-column="48" selection-end-line="327" selection-end-column="48" />
+        <state relative-caret-position="161">
+          <caret line="326" column="51" lean-forward="false" selection-start-line="326" selection-start-column="51" selection-end-line="326" selection-end-column="51" />
           <folding>
-            <marker date="1501291662791" expanded="true" signature="1615:2216" ph="insert into jobbole" />
-            <marker date="1501291662791" expanded="true" signature="3535:4659" ph="insert into zhihu_question... " />
-            <marker date="1501291662791" expanded="true" signature="6507:7362" ph="insert into zhihu_answer... " />
-            <marker date="1501291662791" expanded="true" signature="9614:10103" ph="insert into lagou_job... " />
-            <marker date="1501291662791" expanded="true" signature="10104:10754" ph="UPDATE url=V... " />
-            <marker date="1501291662791" expanded="true" signature="12679:13168" ph="insert into lianjia... " />
-            <marker date="1501291662791" expanded="true" signature="13169:13504" ph="UPDATE url=V... " />
-            <marker date="1501291662791" expanded="true" signature="15321:15674" ph="insert into LianJia_latitude_longitude... " />
-            <marker date="1501291662791" expanded="true" signature="15675:15964" ph="UPDATE resid... " />
+            <marker date="1501294455907" expanded="true" signature="1615:2216" ph="insert into jobbole" />
+            <marker date="1501294455907" expanded="true" signature="3535:4659" ph="insert into zhihu_question... " />
+            <marker date="1501294455907" expanded="true" signature="6507:7362" ph="insert into zhihu_answer... " />
+            <marker date="1501294455907" expanded="true" signature="9614:10103" ph="insert into lagou_job... " />
+            <marker date="1501294455907" expanded="true" signature="10104:10754" ph="UPDATE url=V... " />
+            <marker date="1501294455907" expanded="true" signature="12705:13204" ph="insert into lianjia... " />
+            <marker date="1501294455907" expanded="true" signature="13205:13540" ph="UPDATE url=V... " />
+            <marker date="1501294455907" expanded="true" signature="15364:15717" ph="insert into LianJia_latitude_longitude... " />
+            <marker date="1501294455907" expanded="true" signature="15718:16007" ph="UPDATE resid... " />
           </folding>
         </state>
       </provider>
