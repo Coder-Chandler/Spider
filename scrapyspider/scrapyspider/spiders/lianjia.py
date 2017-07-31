@@ -57,7 +57,8 @@ class LianjiaSpider(RedisSpider):
     #     self.browser.quit()
 
     def filter_all_urls(self, value):
-        match_re = re.match("(.*sh.lianjia.com/zufang/(([a-z]{3,30}/d)|(shz\d+.html)|([a-z]{3,30}$)|d\d+))", value)
+        # match_re = re.match("(.*sh.lianjia.com/zufang/(([a-z]{3,30}/d)|(shz\d+.html)|([a-z]{3,30}$)|d\d+))", value)
+        match_re = re.match("(.*sh.lianjia.com/zufang/(([a-z]{3,30}/d)|(shzr\d+.html)|([a-z]{3,30}$)|d\d+))", value)
         if match_re:
             return True
         else:
@@ -70,7 +71,8 @@ class LianjiaSpider(RedisSpider):
         next_url = response.xpath("//a[@gahref='results_next_page']/@href").extract_first("")
         next_url = parse.urljoin(response.url, next_url)  # 提取下一页，交给scrapy下载
         for url in all_urls:
-            match_re_main = re.match("(.*sh.lianjia.com/zufang/((shz)\d*)(.html$))", url)
+            # match_re_main = re.match("(.*sh.lianjia.com/zufang/((shz)\d*)(.html$))", url)
+            match_re_main = re.match("(.*sh.lianjia.com/zufang/((shzr)\d*)(.html$))", url)
             # match_re_region = re.match("(.*sh.lianjia.com/zufang/([a-z]{3,30}$))", url)
             if match_re_main:
                 request_url = match_re_main.group(1)
@@ -80,44 +82,62 @@ class LianjiaSpider(RedisSpider):
 
     def parse_lianjia(self, response):
         lianjia_id = 0
-        match_re = re.match("(.*sh.lianjia.com/zufang/(shz)(\d+)).*", response.url)
+        # match_re = re.match("(.*sh.lianjia.com/zufang/(shz)(\d+)).*", response.url)
+        match_re = re.match("(.*sh.lianjia.com/zufang/(shzr)(\d+)).*", response.url)
         if match_re:
             lianjia_id = int(match_re.group(3))
         item_loader = ItemLoader(item=LianJiaItem(), response=response)
         item_loader.add_value("url", response.url)
         item_loader.add_value("lianjia_id", lianjia_id)
         # if 'shzr' in response.url:
-        #     item_loader.add_css("residential_district_name",
-        #                         "table.aroundInfo tr:nth-child(4) td:nth-child(2) p a::text")
-        #     item_loader.add_css("residential_district_url",
-        #                         "table.aroundInfo tr:nth-child(4) td:nth-child(2) p a::attr(href)")
-        #     item_loader.add_css("region", "table.aroundInfo tr:nth-child(3) td:nth-child(2) a::text")
-        #     item_loader.add_css("room_count", ".aroundInfo tr:nth-child(1) td:nth-child(2)::text")
-        #     item_loader.add_css("address", "table.aroundInfo tr:nth-child(5) td:nth-child(2) p::attr(title)")
-        #     item_loader.add_css("house_area", ".houseInfo ziru_hezu .area .mainInfo::text")
-        #     item_loader.add_css("face_direction", "table.aroundInfo tr:nth-child(2) td:nth-child(4)::text")
-        #     item_loader.add_css("floor", "table.aroundInfo tr:nth-child(2) td:nth-child(2)::text")
-        #     item_loader.add_css("publish_time", "table.aroundInfo tr:nth-child(4) td:nth-child(4)::text")
-        #     item_loader.add_css("total_watch_count", ".evaluate.rate::text")
+        judge = response.css(".label_ziru::text").extract_first("")
+        if judge == "自如整租":
+            item_loader.add_css("residential_district_name", ".aroundInfo .addrEllipsis::attr(title)")
+            item_loader.add_css("residential_district_url", ".aroundInfo .addrEllipsis a::attr(href)")
+            item_loader.add_css("title", ".title-wrapper .title h1::text")
+            item_loader.add_css("region", "table.aroundInfo tr:nth-child(2) td:nth-child(2) a::text")
+            item_loader.add_css("region_detail", "table.aroundInfo tr:nth-child(2) td:nth-child(2) a::text")
+            item_loader.add_css("room_count", ".houseInfo.ziru_zhengzu .room .mainInfo::text")
+            item_loader.add_css("address", ".aroundInfo tr:nth-child(4) td:nth-child(2) p::attr(title)")
+            item_loader.add_css("house_area", ".houseInfo.ziru_zhengzu .area .mainInfo::text")
+            item_loader.add_css("face_direction", ".aroundInfo tr:nth-child(1) td:nth-child(4)::text")
+            item_loader.add_css("floor", "table.aroundInfo tr:nth-child(1) td:nth-child(2)::text")
+            item_loader.add_css("publish_time", "table.aroundInfo tr:nth-child(2) td:nth-child(4)::text")
+            item_loader.add_css("total_watch_count", ".evaluate.rate::text")
+            item_loader.add_xpath("rent_price", "//div[@class='mainInfo bold']/text()")
+        elif judge == "自如合租":
+            item_loader.add_css("residential_district_name", ".aroundInfo .addrEllipsis::attr(title)")
+            item_loader.add_css("residential_district_url", ".aroundInfo .addrEllipsis a::attr(href)")
+            item_loader.add_css("title", ".title-wrapper .title h1::text")
+            item_loader.add_css("region", "table.aroundInfo tr:nth-child(3) td:nth-child(2) a::text")
+            item_loader.add_css("region_detail", "table.aroundInfo tr:nth-child(3) td:nth-child(2) a::text")
+            item_loader.add_css("room_count", "table.aroundInfo tr:nth-child(1) td:nth-child(2)::text")
+            item_loader.add_css("address", ".aroundInfo tr:nth-child(5) td:nth-child(2) p::attr(title)")
+            item_loader.add_css("house_area", "table.aroundInfo tr:nth-child(1) td:nth-child(4)::text")
+            item_loader.add_css("face_direction", "table.aroundInfo tr:nth-child(2) td:nth-child(4)::text")
+            item_loader.add_css("floor", "table.aroundInfo tr:nth-child(2) td:nth-child(2)::text")
+            item_loader.add_css("publish_time", "table.aroundInfo tr:nth-child(3) td:nth-child(4)::text")
+            item_loader.add_css("total_watch_count", ".evaluate.rate::text")
+            item_loader.add_xpath("rent_price", "//div[@class='mainInfo bold']/text()")
         # if 'shz' in response.url:
-        item_loader.add_css("residential_district_name",
-                            "table.aroundInfo tr:nth-child(3) td:nth-child(2) p a::text")
-        item_loader.add_css("residential_district_url",
-                            "table.aroundInfo tr:nth-child(3) td:nth-child(2) p a::attr(href)")
-        item_loader.add_css("title", ".title-wrapper .title h1::text")
-        item_loader.add_css("region", "table.aroundInfo tr:nth-child(2) td:nth-child(2) a::text")
-        item_loader.add_css("region_detail", "table.aroundInfo tr:nth-child(2) td:nth-child(2) a::text")
-        item_loader.add_css("room_count", ".houseInfo .room .mainInfo::text")
-        item_loader.add_css("address", "table.aroundInfo tr:nth-child(4) td:nth-child(2) p::attr(title)")
-        item_loader.add_css("house_area", ".houseInfo .area .mainInfo::text")
-        item_loader.add_css("face_direction", "table.aroundInfo tr:nth-child(1) td:nth-child(4)::text")
-        item_loader.add_css("floor", "table.aroundInfo tr td:nth-child(2)::text")
-        item_loader.add_css("publish_time", "table.aroundInfo tr:nth-child(2) td:nth-child(4)::text")
-        item_loader.add_css("total_watch_count", ".totalCount span::text")
-        item_loader.add_xpath("rent_price", "//div[@class='mainInfo bold']/text()")
+        # item_loader.add_css("residential_district_name",
+        #                     "table.aroundInfo tr:nth-child(3) td:nth-child(2) p a::text")
+        # item_loader.add_css("residential_district_url",
+        #                     "table.aroundInfo tr:nth-child(3) td:nth-child(2) p a::attr(href)")
+        # item_loader.add_css("title", ".title-wrapper .title h1::text")
+        # item_loader.add_css("region", "table.aroundInfo tr:nth-child(2) td:nth-child(2) a::text")
+        # item_loader.add_css("region_detail", "table.aroundInfo tr:nth-child(2) td:nth-child(2) a::text")
+        # item_loader.add_css("room_count", ".houseInfo .room .mainInfo::text")
+        # item_loader.add_css("address", "table.aroundInfo tr:nth-child(4) td:nth-child(2) p::attr(title)")
+        # item_loader.add_css("house_area", ".houseInfo .area .mainInfo::text")
+        # item_loader.add_css("face_direction", "table.aroundInfo tr:nth-child(1) td:nth-child(4)::text")
+        # item_loader.add_css("floor", "table.aroundInfo tr td:nth-child(2)::text")
+        # item_loader.add_css("publish_time", "table.aroundInfo tr:nth-child(2) td:nth-child(4)::text")
+        # item_loader.add_css("total_watch_count", ".totalCount span::text")
+        # item_loader.add_xpath("rent_price", "//div[@class='mainInfo bold']/text()")
 
         lianjia = item_loader.load_item()
-        residential_district_name = lianjia.get("residential_district_name", "")
+        residential_district_name = lianjia.get("residential_district_name")[0]
         residential_district_url = lianjia.get("residential_district_url")[0]
         residential_district_url = parse.urljoin(response.url, residential_district_url)
         lianjia["residential_district_url"] = residential_district_url
@@ -141,7 +161,7 @@ class LianjiaSpider(RedisSpider):
         item_loader.add_xpath("longitude", "//a[@id='actshowMap_xiaoqu']/@xiaoqu")
         item_loader.add_xpath("latitude", "//a[@id='actshowMap_xiaoqu']/@xiaoqu")
         latitude_longitude = item_loader.load_item()
-        latitude_longitude["residential_district_name"] = residential_district_name[0]
+        latitude_longitude["residential_district_name"] = residential_district_name
         latitude_longitude["residential_district_url"] = residential_district_url
         latitude_longitude["lianjia_id"] = lianjia_id
 

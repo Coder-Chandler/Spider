@@ -277,7 +277,9 @@ class LianJiaItem(scrapy.Item):
     region = scrapy.Field()
     region_detail = scrapy.Field()
     address = scrapy.Field()
-    house_area = scrapy.Field()
+    house_area = scrapy.Field(
+        input_processor=MapCompose(get_nums)
+    )
     room_count = scrapy.Field()
     face_direction = scrapy.Field()
     rent_price = scrapy.Field()
@@ -291,7 +293,7 @@ class LianJiaItem(scrapy.Item):
 
     def get_insert_sql(self):
         insert_sql = """
-            insert into lianjia(url, lianjia_id, residential_district_name, 
+            insert into lianjia_copy(url, lianjia_id, residential_district_name, 
                                 residential_district_url, title, region, region_detail,
                                 address, house_area, room_count, face_direction, 
                                 rent_price, floor, publish_time, total_watch_count, 
@@ -314,13 +316,16 @@ class LianJiaItem(scrapy.Item):
         region = self["region"][0]
         region_detail = self["region"][1]
         address = self["address"][0]
-        house_area = float("".join(self["house_area"]))*1.0
-        room_count = ",".join(self["room_count"])
+        house_area = float(self["house_area"][0])*1.0
+        room_count = int(self["room_count"][0][0])
         face_direction = "".join(self["face_direction"]).strip()
         rent_price = int("".join(self["rent_price"]))
         floor = self["floor"][0]
         publish_time = self["publish_time"][0]
-        total_watch_count = self["total_watch_count"][0]
+        try:
+            total_watch_count = self["total_watch_count"][0]
+        except KeyError:
+            total_watch_count = 0
         crwal_time = datetime.datetime.now()
         crwal_update_time = datetime.datetime.now()
 
@@ -347,7 +352,7 @@ class LianJia_latitude_longitude(scrapy.Item):
 
     def get_insert_sql(self):
         insert_sql = """
-                insert into LianJia_latitude_longitude(lianjia_id, residential_district_name, 
+                insert into LianJia_latitude_longitude_copy(lianjia_id, residential_district_name, 
                                                        residential_district_url, longitude, latitude, 
                                                        crwal_time, crwal_update_time)
                 VALUES (%s, %s, %s, %s, %s, %s, %s) 

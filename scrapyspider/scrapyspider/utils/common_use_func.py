@@ -32,6 +32,8 @@ def get_nums(value):
         value = "".join(str(i) for i in value)
     elif type(value) == int:
         return value
+    elif value is None:
+        return 0
     match_re = re.match(".*?(\d+).*", value)
     if match_re:
         nums = int(match_re.group(1))
@@ -132,7 +134,7 @@ def get_work_years_max(value):
         value = 0
     elif '以上' in value:
         value = 0
-    elif value == "应届毕业生":
+    elif "应届毕业生" in value:
         value = 0
     return int(value)
 
@@ -188,11 +190,11 @@ def get_latitude(value):
 # print(match_re.group(1))
 #
 # s=['http://sh.lianjia.com/zufang/sardef/d5','http://sh.lianjia.com/zufang/were','http://sh.lianjia.com/zufang/de234',
-#    'http://sh.lianjia.com/zufang/shz232423.html']
+#    'http://sh.lianjia.com/zufang/shzr232423.html', 'http://sh.lianjia.com/zufang/shz232423.html']
 # #
 # #
 # def filter_all_urls( value):
-#     match_re = re.match("(.*sh.lianjia.com/zufang/(([a-z]{3,30}/d)|(shz\d+.html)|([a-z]{3,30}$)|d\d+))", value)
+#     match_re = re.match("(.*sh.lianjia.com/zufang/(([a-z]{3,30}/d)|(shzr\d+.html)|([a-z]{3,30}$)|d\d+))", value)
 #     if match_re:
 #         return True
 #     else:

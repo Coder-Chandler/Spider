@@ -57,9 +57,9 @@ COOKIES_ENABLED = False
 DOWNLOADER_MIDDLEWARES = {
    # 'scrapyspider.middlewares.MyCustomDownloaderMiddleware': 543,
      'scrapyspider.middlewares.RandomUserAgentMiddleware': 1,
-   #   'scrapyspider.middlewares.JSPageMiddleware': 1,
-     # 'scrapyspider.middlewares.RandomProxyMiddleware': 2,
-     # 'scrapy.contrib.downloadermiddleware.cookies.CookiesMiddleware': 700,
+   # 'scrapyspider.middlewares.JSPageMiddleware': 1,
+   # 'scrapyspider.middlewares.RandomProxyMiddleware': 2,
+   # 'scrapy.contrib.downloadermiddleware.cookies.CookiesMiddleware': 700,
      'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
 }
 
@@ -99,7 +99,7 @@ AUTOTHROTTLE_MAX_DELAY = 60
 AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
 # Enable showing throttling stats for every response received:
 AUTOTHROTTLE_DEBUG = False
-# DOWNLOAD_DELAY = 1
+# DOWNLOAD_DELAY = 3
 
 # Enable and configure HTTP caching (disabled by default)
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings

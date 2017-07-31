@@ -7,6 +7,7 @@ from scrapy.xlib.pydispatch import dispatcher
 from scrapy import signals
 from items import LaGouJobItem, LaGouItemLoader
 from scrapy_redis.spiders import RedisSpider
+from pyvirtualdisplay import Display
 import datetime
 import re
 
@@ -27,23 +28,27 @@ class LagoujobSpider(RedisSpider):
     }
 
     # def __init__(self):
-    #     self.browser = webdriver.Chrome(executable_path="/home/chandler/github/Spider/chromedriver")
     #     super(LagoujobSpider, self).__init__()
+    #     display = Display(visible=0, size=(800, 600))
+    #     display.start()
+    #     chrome_opt = webdriver.ChromeOptions()
+    #     prefs = {"profile.managed_default_content_settings.images": 2}
+    #     chrome_opt.add_experimental_option("prefs", prefs)
+    #     self.browser = webdriver.Chrome(executable_path="/home/chandler/github/Spider/chromedriver",
+    #                                     chrome_options=chrome_opt)
+    #     self.browser.implicitly_wait(10)  # 设置超时时间
+    #     self.browser.set_page_load_timeout(10)  # 设置超时时间
+    #     self.fail_urls = []
+    #     dispatcher.connect(self.handle_spider_closed, signals.spider_closed)
     #     dispatcher.connect(self.spider_closed, signals.spider_closed)
+    #
+    # def handle_spider_closed(self, spider, reason):
+    #     self.crawler.stats.set_value("failed_urls", ",".join(self.fail_urls))
     #
     # def spider_closed(self, spider):
     #     # 爬虫退出，关闭chrome
     #     print("spider closed")
     #     self.browser.quit()
-
-    handle_httpstatus_list = [401]
-
-    def __init__(self):
-        self.fail_urls = []
-        dispatcher.connect(self.handle_spider_closed, signals.spider_closed)
-
-    def handle_spider_closed(self, spider, reason):
-        self.crawler.stats.set_value("failed_urls", ",".join(self.fail_urls))
 
     def parse(self, response):
         all_urls = response.xpath("//a/@href").extract()

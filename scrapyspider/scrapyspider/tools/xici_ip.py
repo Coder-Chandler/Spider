@@ -9,26 +9,25 @@ cursor = conn.cursor()
 def crawl_ips():
     # 爬取西刺免费代理ip
     headers = {'User-Agent': "Mozilla/5.0 (compatible; MSIE 10.0; Macintosh; Intel Mac OS X 10_7_3; Trident/6.0)"}
-    for i in range(1, 10):
-        re = requests.get("http://superfastip.com/welcome/getips/{0}".format(i), headers=headers)
+    for i in range(1, 1000):
+        re = requests.get("http://www.xicidaili.com/nn/{0}".format(i), headers=headers)
         # print(re.text)
         selector = Selector(text=re.text)
-        all_trs = selector.css("#iptable11 tr")
+        all_trs = selector.css("#ip_list tr")
 
         ip_list = []
         for tr in all_trs[1:]:
-            # speed_str = tr.css(".bar::attr(title)").extract()[0]
-            # speed = 0.0
-            # if speed_str:
-            #     speed = float(speed_str.split("秒")[0])
-            #     # print(speed)
+            speed_str = tr.css(".bar::attr(title)").extract()[0]
+            speed = 0.0
+            if speed_str:
+                speed = float(speed_str.split("秒")[0])
+                # print(speed)
             all_texts = tr.css("td::text").extract()
             # print(all_texts)
 
-            ip = all_texts[1]
-            port = all_texts[2]
+            ip = all_texts[0]
+            port = all_texts[1]
             proxy_type = all_texts[5]
-            speed = float(all_texts[6])*1.0
 
             ip_list.append((ip, port, proxy_type, speed))
 
@@ -56,7 +55,7 @@ class GetIP(object):
 
     def judge_ip(self, ip, port):
         # judge whether the ip can be used
-        http_url = "http://sh.lianjia.com/zufang"
+        http_url = "https://www.lagou.com/jobs/list_?px=new&city=%E4%B8%8A%E6%B5%B7#filterBox"
         proxy_url = "http://{0}:{1}".format(ip, port)
         try:
             proxy_dict = {
@@ -93,13 +92,14 @@ class GetIP(object):
 
             judge_re = self.judge_ip(ip, port)
             if judge_re:
-                # return "http://{0}:{1}".format(ip, port)
-                return self.get_random_ip()
+                print("http://{0}:{1}".format(ip, port))
+                return "http://{0}:{1}".format(ip, port)
             else:
                 return self.get_random_ip()
 
 
 if __name__ == "__main__":
     # crawl_ips()
+    # for i in range(1,10000):
     get_ip = GetIP()
     get_ip.get_random_ip()
