@@ -78,7 +78,7 @@ ITEM_PIPELINES = {
    # 'scrapyspider.pipelines.JsonExporterPipeline': 2,
    # 'scrapyspider.pipelines.ArticleImagePipeline': 2,
    'scrapyspider.pipelines.MysqlTwistedPipeline': 1,
-   'scrapy_redis.pipelines.RedisPipeline': 200
+   # 'scrapy_redis.pipelines.RedisPipeline': 200
 }
 IMAGES_URLS_FIELD = "front_image_url"
 project_dir = os.path.abspath(os.path.dirname(__file__))
@@ -99,7 +99,7 @@ AUTOTHROTTLE_MAX_DELAY = 60
 AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
 # Enable showing throttling stats for every response received:
 AUTOTHROTTLE_DEBUG = False
-# DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 5
 
 # Enable and configure HTTP caching (disabled by default)
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
@@ -109,19 +109,19 @@ AUTOTHROTTLE_DEBUG = False
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-MYSQL_HOST = "192.168.1.104"
+MYSQL_HOST = "192.168.1.106"
 MYSQL_DBNAME = "spider"
 MYSQL_USER = "root"
 MYSQL_PASSWORD = "root"
 
-# Enables scheduling storing requests queue in redis.
-SCHEDULER = "scrapy_redis.scheduler.Scheduler"
-# Ensure all spiders share same duplicates filter through redis.
-DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
-
-REDIS_HOST = 'localhost'
-
-REDIS_PORT = 6379
+# # Enables scheduling storing requests queue in redis.
+# SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+# # Ensure all spiders share same duplicates filter through redis.
+# DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+#
+# REDIS_HOST = 'localhost'
+#
+# REDIS_PORT = 6379
 
 # 注释设置为主机，打开设置为僚机
 # REDIS_URL = 'redis://192.168.1.103:6379'

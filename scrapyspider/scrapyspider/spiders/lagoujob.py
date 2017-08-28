@@ -20,7 +20,7 @@ class LagoujobSpider(RedisSpider):
 
     headers = {
         "HOST": "www.lagou.com",
-        "Referer": "https://www.lagou.com",
+        "Referer": "https://www.lagou.com/jobs/list_?px=new&city=上海#filterBox",
         "Authorization": "Bearer Mi4wQUREQWlJMkY5QWtBWUFJWGZCUHRDeGNBQUFCaEFsVk5WUDZQV1FBU0ZRcGMybVFReDB"
                          "WbjNsRzN4R3QzcjdqTGZn|1500016980|81289be24b3158df44a24d22e9e682cd1ad3e76c",
         'User-Agent': "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) "

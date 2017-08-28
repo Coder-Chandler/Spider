@@ -21,8 +21,6 @@ class ZhihuSpider(scrapy.Spider):
     headers = {
         "HOST": "www.zhihu.com",
         "Referer": "https://www.zhizhu.com",
-        "Authorization": "Bearer Mi4wQUREQWlJMkY5QWtBWUFJWGZCUHRDeGNBQUFCaEFsVk5WUDZQV1FBU0ZRcGMybVFReDB"
-                         "WbjNsRzN4R3QzcjdqTGZn|1500016980|81289be24b3158df44a24d22e9e682cd1ad3e76c",
         'User-Agent': "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) "
                       "Ubuntu Chromium/58.0.3029.110 Chrome/58.0.3029.110 Safari/537.36"
     }
@@ -66,9 +64,11 @@ class ZhihuSpider(scrapy.Spider):
             if match_re:
                 request_url = match_re.group(1)
                 yield scrapy.Request(request_url, headers=self.headers, callback=self.parse_question)
+                break
 
             else:
-                yield scrapy.Request(url, headers=self.headers, callback=self.parse)
+                # yield scrapy.Request(url, headers=self.headers, callback=self.parse)
+                pass
 
     def parse_question(self, response):
         question_id = 0
