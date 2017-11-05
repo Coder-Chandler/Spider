@@ -123,7 +123,7 @@ MYSQL_PASSWORD = "root"
 #
 # REDIS_PORT = 6379
 
-# 注释设置为主机，打开设置为僚机
+# 注释为主机，打开为僚机
 # REDIS_URL = 'redis://192.168.1.103:6379'
 
 
